@@ -22,7 +22,52 @@ public class ClienteController {
         Cliente c = new Cliente(nome, cpf);
         clientes.add(c);
     }
-
+    
+    public Cliente getCliente(int id){
+        return clientes.get(id);
+    }
+    
+    public boolean setClienteName(int id, String name){
+        if (id >= 0 && id < this.clientes.size()){
+            clientes.get(id).setNome(name);
+            return true;
+        } 
+        return false;
+    }
+    
+    public boolean setClienteTelefone(int id, String tel){
+        if (id >= 0 && id < this.clientes.size()){
+            clientes.get(id).setTelefone(tel);
+            return true;
+        } 
+        return false;
+    }
+    
+    public boolean setClienteEndereco(int id, String end){
+        if (id >= 0 && id < this.clientes.size()){
+            clientes.get(id).setEndereco(end);
+            return true;
+        } 
+        return false;
+    }
+    
+    public boolean setClienteEmail(int id, String email){
+        if (id >= 0 && id < this.clientes.size()){
+            clientes.get(id).setEmail(email);
+            return true;
+        } 
+        return false;
+    }
+    
+    
+    public boolean removeCliente(int id){
+        if (id >= 0 && id < this.clientes.size()){
+            clientes.remove(id);
+            return true;
+        } 
+        return false;
+    }
+    
     
     
     @Override

@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author kirito
+ * Classe responsavel por controlar todos os clientes
+ * @author Luiz Gustavo
+ * 
  */
 public class ClienteController {
     private List<Cliente> clientes = new ArrayList<>();
@@ -59,6 +60,14 @@ public class ClienteController {
         return false;
     }
     
+        
+    public boolean setClienteCpf(int id, String cpf){
+        if (id >= 0 && id < this.clientes.size()){
+            clientes.get(id).setCpf(cpf);
+            return true;
+        } 
+        return false;
+    }
     
     public boolean removeCliente(int id){
         if (id >= 0 && id < this.clientes.size()){

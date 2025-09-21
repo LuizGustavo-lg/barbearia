@@ -24,6 +24,8 @@ public class ClienteController {
         clientes.add(c);
     }
     
+    public List<Cliente> get
+    
     public Cliente getCliente(int id){
         return clientes.get(id);
     }

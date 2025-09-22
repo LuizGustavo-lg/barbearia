@@ -9,7 +9,7 @@ package com.ufvjm.barbearia.model;
  * @author kirito
  */
 public class Funcionario extends Pessoa{
-    public String password;
+    private String password;
     
     public Funcionario(String nome, String cpf, String telefone, String email, String endereco) {
         super(nome, cpf, telefone, email, endereco);

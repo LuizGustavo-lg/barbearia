@@ -11,7 +11,7 @@ package com.ufvjm.barbearia.model;
 public class Funcionario extends Pessoa{
     private String password;
     private String cargo;
-    
+
     public Funcionario(String nome, String cpf, String telefone, String email, String endereco, String cargo) {
         super(nome, cpf, telefone, email, endereco);
         this.cargo = cargo;
@@ -33,12 +33,16 @@ public class Funcionario extends Pessoa{
         this.cargo = cargo;
     }
 
-    public String getPassword() {
-        return password;
+    public boolean verifyPassword(String pass){
+        return this.password.equals(pass);
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public boolean setPassword(String oldPass, String newPass) {
+        if (this.verifyPassword(oldPass)){
+            this.password = newPass;
+            return true;
+        }
+        return false;
     }
     
     public boolean adminAcess(){

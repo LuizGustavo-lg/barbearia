@@ -26,12 +26,11 @@ public class FuncionarioController {
         return funcionarios.get(id);
     }
     
-    public boolean setFuncionarioPass(int id, String pass){
-        if (id >= 0 && id < this.funcionarios.size()){
-            funcionarios.get(id).setPassword(pass);
-            return true;
+    public boolean setFuncionarioPass(int id, String oldPass, String newPass){
+        if (id < 0 || id >= this.funcionarios.size()){
+            return false;
         } 
-        return false;
+        return funcionarios.get(id).setPassword(oldPass, newPass);
     }
     
     public boolean setFuncionarioName(int id, String name){

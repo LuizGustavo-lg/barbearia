@@ -10,27 +10,13 @@ package com.ufvjm.barbearia.model;
  */
 public class Funcionario extends Pessoa{
     private String password;
-    protected String cargo;
 
-    public Funcionario(String nome, String cpf, String telefone, String email, String endereco, String cargo) {
-        super(nome, cpf, telefone, email, endereco);
-        this.cargo = cargo;
-    }
-    
     public Funcionario(String nome, String cpf, String telefone, String email, String endereco) {
         super(nome, cpf, telefone, email, endereco);
     }
     
     public Funcionario(String nome, String cpf) {
         super(nome, cpf);
-    }
-
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
     }
 
     public boolean verifyPassword(String pass){

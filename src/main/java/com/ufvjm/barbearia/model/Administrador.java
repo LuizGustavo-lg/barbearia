@@ -12,12 +12,10 @@ public class Administrador extends Funcionario{
 
     public Administrador(String nome, String cpf, String telefone, String email, String endereco) {
         super(nome, cpf, telefone, email, endereco);
-        super.cargo = "Administrador";
     }
 
     public Administrador(String nome, String cpf) {
         super(nome, cpf);
-        super.cargo = "Administrador";
     }
     
 

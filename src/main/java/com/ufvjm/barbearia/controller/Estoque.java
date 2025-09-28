@@ -12,10 +12,10 @@ import java.util.List;
  *
  * @author kirito
  */
-public class ProdutoController {
+public class Estoque {
     private List<Produto> produtos = new ArrayList<>();
     
-    public ProdutoController(){}
+    public Estoque(){}
     
     
     public void addNewProduto(String nome){
@@ -29,6 +29,9 @@ public class ProdutoController {
         produtos.add(p);
     }
 
+    public List<Produto> getProdutos(){
+        return produtos;
+    }
     
     public Produto getProduto(int id){
         return produtos.get(id);        
@@ -41,10 +44,10 @@ public class ProdutoController {
         produtos.remove(id);
         return true;
     }
-    
+
     @Override
     public String toString() {
-        return "ProdutoController{" + "produtos=" + produtos + '}';
+        return "Estoque{" + "produtos=" + produtos + '}';
     }
-    
+
 }

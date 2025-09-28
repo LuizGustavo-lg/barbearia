@@ -5,6 +5,7 @@
 package com.ufvjm.barbearia;
 import com.ufvjm.barbearia.model.Cliente;
 import com.ufvjm.barbearia.controller.ClienteController;
+import com.ufvjm.barbearia.model.Produto;
         
 /**
  *
@@ -13,14 +14,10 @@ import com.ufvjm.barbearia.controller.ClienteController;
 public class Main {
 
     public static void main(String[] args) {
-        Cliente c = new Cliente("Iago", "12305423254");
+        Produto p1 = new Produto("Creme");
+        Produto p2 = new Produto("Creme");
         
-        System.out.println(c.toString());
-        
-        ClienteController cC = new ClienteController();
-        cC.addNewCliente("Luiz", "12334455365");
-        cC.addNewCliente("Italo", "12334455365");
-        System.out.println(cC.toString());
-        
+        System.out.println(p1);
+        System.out.println(p2);
     }
-}
+} 

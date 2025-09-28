@@ -29,6 +29,9 @@ public class ServicoController {
         servicos.add(p);
     }
     
+    public List<Servico> getServicos(){
+        return servicos;   
+    }
 
     public Servico getServico(int id){
         return servicos.get(id);        

@@ -12,7 +12,8 @@ public class ItemVendavel {
     private String nome;
     private float valor;
     private String descricao;
-
+    protected int id;
+    
     public ItemVendavel(String nome) {
         this.nome = nome;
     }
@@ -52,9 +53,12 @@ public class ItemVendavel {
         this.descricao = descricao;
     }
 
+    public int getId() {
+        return id;
+    }
 
     @Override
     public String toString() {
-        return "ItemVendavel{" + "nome=" + nome + ", valor=" + valor + ", descricao=" + descricao + '}';
+        return "ItemVendavel{" + "nome=" + nome + ", valor=" + valor + ", descricao=" + descricao + ", id=" + id + '}';
     }
 }

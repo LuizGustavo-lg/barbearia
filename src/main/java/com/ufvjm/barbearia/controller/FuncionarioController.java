@@ -18,6 +18,11 @@ public class FuncionarioController {
     
     public FuncionarioController(){}
 
+    public void addNewFuncionario(String nome, String cpf){
+        Funcionario f = new Funcionario(nome, cpf);
+        funcionarios.add(f);
+    }
+    
     public List<Funcionario> getFuncionarios() {
         return funcionarios;
     }

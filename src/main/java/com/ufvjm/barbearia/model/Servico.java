@@ -8,19 +8,18 @@ package com.ufvjm.barbearia.model;
  *
  * @author kirito
  */
-public class Produto extends ItemVendavel{
+public class Servico extends ItemVendavel{
 
-    public Produto(String nome) {
+    public Servico(String nome) {
         super(nome);
     }
 
-    public Produto(String nome, float valor) {
+    public Servico(String nome, float valor) {
         super(nome, valor);
     }
 
-    public Produto(String nome, float valor, String descricao) {
+    public Servico(String nome, float valor, String descricao) {
         super(nome, valor, descricao);
     }
-
     
 }

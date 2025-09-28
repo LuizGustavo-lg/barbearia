@@ -23,19 +23,24 @@ public class ProdutoController {
         produtos.add(p);
     }
     
-    public void addNewProduto(String nome, String code){
-        Produto p = new Produto(nome, code);
-        produtos.add(p);
-    }
-    
     
     public void addNewProduto(String nome, float valor, String code){
-        Produto p = new Produto(nome, valor, code);
+        Produto p = new Produto(nome, valor);
         produtos.add(p);
     }
 
     
+    public Produto getProduto(int id){
+        return produtos.get(id);        
+    }
     
+    public Boolean removeProduto(int id){
+        if (id < 0 || id >= this.produtos.size()){
+            return false;
+        } 
+        produtos.remove(id);
+        return true;
+    }
     
     @Override
     public String toString() {

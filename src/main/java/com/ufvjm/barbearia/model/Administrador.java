@@ -8,7 +8,7 @@ package com.ufvjm.barbearia.model;
  *
  * @author kirito
  */
-public class Administrador extends Funcionario{
+public class Administrador extends Usuario{
 
     public Administrador(String nome, String cpf, String telefone, String email, String endereco) {
         super(nome, cpf, telefone, email, endereco);

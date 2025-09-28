@@ -8,30 +8,12 @@ package com.ufvjm.barbearia.model;
  *
  * @author kirito
  */
-public class Funcionario extends Pessoa{
-    private String password;
-
+public class Funcionario extends Usuario{
     public Funcionario(String nome, String cpf, String telefone, String email, String endereco) {
         super(nome, cpf, telefone, email, endereco);
     }
     
     public Funcionario(String nome, String cpf) {
         super(nome, cpf);
-    }
-
-    public boolean verifyPassword(String pass){
-        return this.password.equals(pass);
-    }
-
-    public boolean setPassword(String oldPass, String newPass) {
-        if (this.verifyPassword(oldPass)){
-            this.password = newPass;
-            return true;
-        }
-        return false;
-    }
-    
-    public boolean adminAcess(){
-        return false;
     }
 }

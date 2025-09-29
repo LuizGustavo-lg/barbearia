@@ -9,13 +9,16 @@ package com.ufvjm.barbearia.model;
  * @author kirito
  */
 public class Cliente extends Pessoa{
+    private static int cont = 0;
     
     public Cliente(String nome, String cpf, String telefone, String email, String endereco) {
         super(nome, cpf, telefone, email, endereco);
+        super.id = ++cont;
     }
 
     public Cliente(String nome, String cpf) {
         super(nome, cpf);
+        super.id = ++cont;
     }
     
     

@@ -14,6 +14,7 @@ public class Pessoa {
     private String telefone;
     private String email;
     private String endereco;
+    protected int id;
 
     public Pessoa(String nome, String cpf) {
         this.nome = nome;
@@ -79,9 +80,13 @@ public class Pessoa {
         this.endereco = endereco;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
-        return "Pessoa{" + "nome=" + nome + ", cpf=" + cpf + ", telefone=" + telefone + ", email=" + email + ", endereco=" + endereco + '}';
-    }
+        return "Pessoa{" + "nome=" + nome + ", cpf=" + cpf + ", telefone=" + telefone + ", email=" + email + ", endereco=" + endereco + ", id=" + id + '}';
+    }    
     
 }

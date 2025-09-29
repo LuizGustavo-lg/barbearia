@@ -8,12 +8,10 @@ package com.ufvjm.barbearia.model;
  *
  * @author kirito
  */
-public class Funcionario extends Usuario{
-    public Funcionario(String nome, String cpf, String telefone, String email, String endereco) {
-        super(nome, cpf, telefone, email, endereco);
-    }
+public class Barbeiro extends Funcionario{
     
-    public Funcionario(String nome, String cpf) {
+    public Barbeiro(String nome, String cpf) {
         super(nome, cpf);
     }
+    
 }

@@ -17,24 +17,27 @@ public class Reserva {
     private Cliente cliente;
     private Servico servico;
     private Estacao estacao;
+    private Barbeiro barbeiro;
     private LocalDateTime datetime;
 
     
-    public Reserva(int id, Atendimento atendimento, Cliente cliente, Servico servico, Estacao estacao, LocalDateTime datetime) {
+    public Reserva(int id, Atendimento atendimento, Cliente cliente, Servico servico, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro) {
         this.id = id;
         this.atendimento = atendimento;
         this.cliente = cliente;
         this.servico = servico;
         this.estacao = estacao;
         this.datetime = datetime;
+        this.barbeiro = barbeiro;
     }
 
-    public Reserva(Atendimento atendimento, Cliente cliente, Servico servico, Estacao estacao, LocalDateTime datetime) {
+    public Reserva(Atendimento atendimento, Cliente cliente, Servico servico, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro) {
         this.atendimento = atendimento;
         this.cliente = cliente;
         this.servico = servico;
         this.estacao = estacao;
         this.datetime = datetime;
+        this.barbeiro = barbeiro;
         
         this.id = ++cont;
     }

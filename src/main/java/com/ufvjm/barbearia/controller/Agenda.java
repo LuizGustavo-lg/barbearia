@@ -4,7 +4,13 @@
  */
 package com.ufvjm.barbearia.controller;
 
+import com.ufvjm.barbearia.model.Atendimento;
+import com.ufvjm.barbearia.model.Barbeiro;
+import com.ufvjm.barbearia.model.Cliente;
+import com.ufvjm.barbearia.model.Estacao;
 import com.ufvjm.barbearia.model.Reserva;
+import com.ufvjm.barbearia.model.Servico;
+import java.time.LocalDateTime;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -21,7 +27,16 @@ public class Agenda {
     public Agenda() {
     }
     
+    public boolean addReserva(Atendimento atendimento, Cliente cliente, Servico servico, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro){
+        if (this.verificarHorario(datetime)) {
+            return false;
+        }
+        agendamentos.add(new Reserva(atendimento, cliente, servico, estacao, datetime, barbeiro));
+        return true;
+    }
     
     
-    
+    public boolean verificarHorario(LocalDateTime datetime){
+        return !agendamentos.stream().anyMatch(a -> a.getDatetime().equals(datetime));
+    }
 }

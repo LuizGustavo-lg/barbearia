@@ -86,6 +86,14 @@ public class Reserva {
         this.datetime = datetime;
     }
 
+    public Barbeiro getBarbeiro() {
+        return barbeiro;
+    }
+
+    public void setBarbeiro(Barbeiro barbeiro) {
+        this.barbeiro = barbeiro;
+    }
+
     @Override
     public String toString() {
         return "Reserva{" + "id=" + id + ", atendimento=" + atendimento + ", cliente=" + cliente + ", servico=" + servico + ", estacao=" + estacao + ", datetime=" + datetime + '}';

@@ -27,7 +27,7 @@ public class Agenda {
     }
     
     public boolean addReserva(Cliente cliente, Servico servico, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro){
-        if (this.verificarHorario(datetime)) {
+        if (!this.verificarHorario(datetime)) {
             return false;
         }
         agendamentos.add(new Reserva(cliente, servico, estacao, datetime, barbeiro));
@@ -37,5 +37,10 @@ public class Agenda {
     
     public boolean verificarHorario(LocalDateTime datetime){
         return !agendamentos.stream().anyMatch(a -> a.getDatetime().equals(datetime));
+    }
+
+    @Override
+    public String toString() {
+        return "Agenda{" + "agendamentos=" + agendamentos + " \nagendSecundario=" + agendSecundario + '}';
     }
 }

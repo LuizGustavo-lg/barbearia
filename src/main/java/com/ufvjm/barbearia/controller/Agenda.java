@@ -4,7 +4,6 @@
  */
 package com.ufvjm.barbearia.controller;
 
-import com.ufvjm.barbearia.model.Atendimento;
 import com.ufvjm.barbearia.model.Barbeiro;
 import com.ufvjm.barbearia.model.Cliente;
 import com.ufvjm.barbearia.model.Estacao;
@@ -27,11 +26,11 @@ public class Agenda {
     public Agenda() {
     }
     
-    public boolean addReserva(Atendimento atendimento, Cliente cliente, Servico servico, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro){
+    public boolean addReserva(Cliente cliente, Servico servico, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro){
         if (this.verificarHorario(datetime)) {
             return false;
         }
-        agendamentos.add(new Reserva(atendimento, cliente, servico, estacao, datetime, barbeiro));
+        agendamentos.add(new Reserva(cliente, servico, estacao, datetime, barbeiro));
         return true;
     }
     

@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 public class Reserva {
     private int id;
     private static int cont;
-    private Atendimento atendimento;
     private Cliente cliente;
     private Servico servico;
     private Estacao estacao;
@@ -21,9 +20,8 @@ public class Reserva {
     private LocalDateTime datetime;
 
     
-    public Reserva(int id, Atendimento atendimento, Cliente cliente, Servico servico, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro) {
+    public Reserva(int id, Cliente cliente, Servico servico, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro) {
         this.id = id;
-        this.atendimento = atendimento;
         this.cliente = cliente;
         this.servico = servico;
         this.estacao = estacao;
@@ -31,8 +29,7 @@ public class Reserva {
         this.barbeiro = barbeiro;
     }
 
-    public Reserva(Atendimento atendimento, Cliente cliente, Servico servico, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro) {
-        this.atendimento = atendimento;
+    public Reserva(Cliente cliente, Servico servico, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro) {
         this.cliente = cliente;
         this.servico = servico;
         this.estacao = estacao;
@@ -44,14 +41,6 @@ public class Reserva {
 
     public int getId() {
         return id;
-    }
-
-    public Atendimento getAtendimento() {
-        return atendimento;
-    }
-
-    public void setAtendimento(Atendimento atendimento) {
-        this.atendimento = atendimento;
     }
 
     public Cliente getCliente() {
@@ -96,7 +85,7 @@ public class Reserva {
 
     @Override
     public String toString() {
-        return "Reserva{" + "id=" + id + ", atendimento=" + atendimento + ", cliente=" + cliente + ", servico=" + servico + ", estacao=" + estacao + ", datetime=" + datetime + '}';
+        return "Reserva{" + "id=" + id + ", cliente=" + cliente + ", servico=" + servico + ", estacao=" + estacao + ", datetime=" + datetime + '}';
     }
     
       

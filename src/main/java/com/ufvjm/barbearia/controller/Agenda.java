@@ -56,13 +56,19 @@ public class Agenda {
     public List<LocalTime> getHorariosDisponiveisNoDia(){
         
         LocalDate dataAtual = LocalDate.now();
+
+        return getHorariosDisponiveisNoDia(dataAtual);
+    }
+    
+    public List<LocalTime> getHorariosDisponiveisNoDia(LocalDate data){
+        
         List<LocalTime> horariosDisp = new ArrayList<>();
         
         for (int h = 8; h<20; h++){
             for (int m = 0; m<60; m=m+30){
                 LocalTime t = LocalTime.of(h, m);
                 
-                if(verificarHorarioAgenda(dataAtual.atTime(t))){
+                if(verificarHorarioAgenda(data.atTime(t))){
                     horariosDisp.add(t);
                 }
             }

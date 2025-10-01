@@ -26,21 +26,32 @@ public class Agenda {
     public Agenda() {
     }
     
+    
+    private boolean validarHorario(LocalDateTime datetime){
+        return (0 == datetime.getMinute() || datetime.getMinute() == 30);
+    }
+    
     public boolean addReserva(Cliente cliente, Servico servico, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro){
-        if (!this.verificarHorario(datetime)) {
+        
+        if (!this.validarHorario(datetime)){
             return false;
         }
+        
+        if (!this.verificarHorarioAgenda(datetime)) {
+            return false;
+        }
+        
         agendamentos.add(new Reserva(cliente, servico, estacao, datetime, barbeiro));
         return true;
     }
     
     
-    public boolean verificarHorario(LocalDateTime datetime){
+    public boolean verificarHorarioAgenda(LocalDateTime datetime){
         return !agendamentos.stream().anyMatch(a -> a.getDatetime().equals(datetime));
     }
 
     @Override
     public String toString() {
-        return "Agenda{" + "agendamentos=" + agendamentos + " \nagendSecundario=" + agendSecundario + '}';
+        return "Agenda{" + "\nagendamentos=" + agendamentos + " \nagendSecundario=" + agendSecundario + '}';
     }
 }

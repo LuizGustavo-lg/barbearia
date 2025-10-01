@@ -8,7 +8,6 @@ import com.ufvjm.barbearia.model.Barbeiro;
 import com.ufvjm.barbearia.model.Cliente;
 import com.ufvjm.barbearia.model.Estacao;
 import com.ufvjm.barbearia.model.Reserva;
-import com.ufvjm.barbearia.model.Servico;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -33,7 +32,7 @@ public class Agenda {
         return (0 == datetime.getMinute() || datetime.getMinute() == 30);
     }
     
-    public boolean addReserva(Cliente cliente, Servico servico, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro){
+    public boolean addReserva(Cliente cliente, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro){
         
         if (!this.validarHorario(datetime)){
             return false;
@@ -43,7 +42,7 @@ public class Agenda {
             return false;
         }
         
-        agendamentos.add(new Reserva(cliente, servico, estacao, datetime, barbeiro));
+        agendamentos.add(new Reserva(cliente, estacao, datetime, barbeiro));
         return true;
     }
     

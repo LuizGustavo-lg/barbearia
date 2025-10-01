@@ -14,24 +14,21 @@ public class Reserva {
     private int id;
     private static int cont;
     private Cliente cliente;
-    private Servico servico;
     private Estacao estacao;
     private Barbeiro barbeiro;
     private LocalDateTime datetime;
 
     
-    public Reserva(int id, Cliente cliente, Servico servico, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro) {
+    public Reserva(int id, Cliente cliente, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro) {
         this.id = id;
         this.cliente = cliente;
-        this.servico = servico;
         this.estacao = estacao;
         this.datetime = datetime;
         this.barbeiro = barbeiro;
     }
 
-    public Reserva(Cliente cliente, Servico servico, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro) {
+    public Reserva(Cliente cliente, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro) {
         this.cliente = cliente;
-        this.servico = servico;
         this.estacao = estacao;
         this.datetime = datetime;
         this.barbeiro = barbeiro;
@@ -49,14 +46,6 @@ public class Reserva {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-
-    public Servico getServico() {
-        return servico;
-    }
-
-    public void setServico(Servico servico) {
-        this.servico = servico;
     }
 
     public Estacao getEstacao() {
@@ -85,7 +74,7 @@ public class Reserva {
 
     @Override
     public String toString() {
-        return "Reserva{" + "id=" + id + ", cliente=" + cliente + ", servico=" + servico + ", estacao=" + estacao + ", datetime=" + datetime + '}';
+        return "Reserva{" + "id=" + id + ", cliente=" + cliente + ", estacao=" + estacao + ", datetime=" + datetime + '}';
     }
     
       

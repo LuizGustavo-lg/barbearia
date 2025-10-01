@@ -39,7 +39,7 @@ public class Agenda {
             return false;
         }
         
-        if (!this.verificarHorarioAgenda(datetime)) {
+        if (!this.verificarHorarioAgenda(datetime, estacao)) {
             return false;
         }
         
@@ -48,32 +48,36 @@ public class Agenda {
     }
     
     
-    public boolean verificarHorarioAgenda(LocalDateTime datetime){
-        return !agendamentos.stream().anyMatch(a -> a.getDatetime().equals(datetime));
+    public boolean verificarHorarioAgenda(LocalDateTime datetime, Estacao estacao){
+        return !agendamentos.stream().anyMatch((Reserva a) -> a.getDatetime().equals(datetime) && a.getEstacao().getNumero() == estacao.getNumero());
     }
     
     
-    public List<LocalTime> getHorariosDisponiveisNoDia(){
+    public List<List<LocalTime>> getHorariosDisponiveisNoDia(){
         
         LocalDate dataAtual = LocalDate.now();
 
         return getHorariosDisponiveisNoDia(dataAtual);
     }
     
-    public List<LocalTime> getHorariosDisponiveisNoDia(LocalDate data){
+    public List<List<LocalTime>> getHorariosDisponiveisNoDia(LocalDate data){
         
-        List<LocalTime> horariosDisp = new ArrayList<>();
+        EstacaoController estacoes = new EstacaoController();
+        List<List<LocalTime>> horariosDisp = new ArrayList<>();
         
-        for (int h = 8; h<20; h++){
-            for (int m = 0; m<60; m=m+30){
-                LocalTime t = LocalTime.of(h, m);
-                
-                if(verificarHorarioAgenda(data.atTime(t))){
-                    horariosDisp.add(t);
+        for (Estacao e : estacoes.getEstacoes()){
+            List<LocalTime> horariosDispEstacao = new ArrayList<>();
+            for (int h = 8; h<20; h++){
+                for (int m = 0; m<60; m=m+30){
+                    LocalTime t = LocalTime.of(h, m);
+
+                    if(verificarHorarioAgenda(data.atTime(t), e)){
+                        horariosDispEstacao.add(t);
+                    }
                 }
             }
+            horariosDisp.add(horariosDispEstacao);
         }
-                
         return horariosDisp;
     }
     

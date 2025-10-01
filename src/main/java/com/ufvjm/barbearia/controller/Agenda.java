@@ -9,7 +9,9 @@ import com.ufvjm.barbearia.model.Cliente;
 import com.ufvjm.barbearia.model.Estacao;
 import com.ufvjm.barbearia.model.Reserva;
 import com.ufvjm.barbearia.model.Servico;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -49,7 +51,26 @@ public class Agenda {
     public boolean verificarHorarioAgenda(LocalDateTime datetime){
         return !agendamentos.stream().anyMatch(a -> a.getDatetime().equals(datetime));
     }
-
+    
+    
+    public List<LocalTime> getHorariosDisponiveisNoDia(){
+        
+        LocalDate dataAtual = LocalDate.now();
+        List<LocalTime> horariosDisp = new ArrayList<>();
+        
+        for (int h = 8; h<20; h++){
+            for (int m = 0; m<60; m=m+30){
+                LocalTime t = LocalTime.of(h, m);
+                
+                if(verificarHorarioAgenda(dataAtual.atTime(t))){
+                    horariosDisp.add(t);
+                }
+            }
+        }
+                
+        return horariosDisp;
+    }
+    
     @Override
     public String toString() {
         return "Agenda{" + "\nagendamentos=" + agendamentos + " \nagendSecundario=" + agendSecundario + '}';

@@ -17,21 +17,24 @@ public class Reserva {
     private Estacao estacao;
     private Barbeiro barbeiro;
     private LocalDateTime datetime;
+    private int passosTempo;
 
     
-    public Reserva(int id, Cliente cliente, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro) {
+    public Reserva(int id, Cliente cliente, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro, int passosTempo) {
         this.id = id;
         this.cliente = cliente;
         this.estacao = estacao;
         this.datetime = datetime;
         this.barbeiro = barbeiro;
+        this.passosTempo = passosTempo;
     }
 
-    public Reserva(Cliente cliente, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro) {
+    public Reserva(Cliente cliente, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro, int passosTempo) {
         this.cliente = cliente;
         this.estacao = estacao;
         this.datetime = datetime;
         this.barbeiro = barbeiro;
+        this.passosTempo = passosTempo;
         
         this.id = ++cont;
     }
@@ -71,6 +74,15 @@ public class Reserva {
     public void setBarbeiro(Barbeiro barbeiro) {
         this.barbeiro = barbeiro;
     }
+
+    public int getPassosTempo() {
+        return passosTempo;
+    }
+
+    public void setPassosTempo(int passosTempo) {
+        this.passosTempo = passosTempo;
+    }
+    
 
     @Override
     public String toString() {

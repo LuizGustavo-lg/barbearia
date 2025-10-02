@@ -32,23 +32,32 @@ public class Agenda {
         return (0 == datetime.getMinute() || datetime.getMinute() == 30);
     }
     
-    public boolean addReserva(Cliente cliente, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro){
+    public boolean addReserva(Cliente cliente, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro, int passosTempo){
         
         if (!this.validarHorario(datetime)){
             return false;
         }
         
-        if (!this.verificarHorarioAgenda(datetime, estacao)) {
+        if (!this.verificarHorarioAgenda(datetime, estacao, passosTempo)) {
             return false;
         }
         
-        agendamentos.add(new Reserva(cliente, estacao, datetime, barbeiro));
+        agendamentos.add(new Reserva(cliente, estacao, datetime, barbeiro, passosTempo));
         return true;
     }
     
     
-    public boolean verificarHorarioAgenda(LocalDateTime datetime, Estacao estacao){
-        return !agendamentos.stream().anyMatch((Reserva a) -> a.getDatetime().equals(datetime) && a.getEstacao().getNumero() == estacao.getNumero());
+    public boolean verificarHorarioAgenda(LocalDateTime datetime, Estacao estacao, int passosTempo){
+        for (int p = 0; p<passosTempo; p++){
+            for (Reserva r : agendamentos){
+                for (int i = 0; i<r.getPassosTempo(); i++){
+                    if (r.getDatetime().plusMinutes(i*30).equals(datetime.plusMinutes(p*30)) && r.getEstacao().getNumero() == estacao.getNumero()){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
     
     
@@ -70,7 +79,7 @@ public class Agenda {
                 for (int m = 0; m<60; m=m+30){
                     LocalTime t = LocalTime.of(h, m);
 
-                    if(verificarHorarioAgenda(data.atTime(t), e)){
+                    if(verificarHorarioAgenda(data.atTime(t), e, 1)){
                         horariosDispEstacao.add(t);
                     }
                 }

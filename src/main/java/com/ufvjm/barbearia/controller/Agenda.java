@@ -48,12 +48,17 @@ public class Agenda {
     
     
     public boolean verificarHorarioAgenda(LocalDateTime datetime, Estacao estacao, int passosTempo){
-        for (int p = 0; p<passosTempo; p++){
-            for (Reserva r : agendamentos){
-                for (int i = 0; i<r.getPassosTempo(); i++){
-                    if (r.getDatetime().plusMinutes(i*30).equals(datetime.plusMinutes(p*30)) && r.getEstacao().getNumero() == estacao.getNumero()){
-                        return false;
-                    }
+        LocalDateTime inicioNova = datetime;
+        LocalDateTime fimNova = datetime.plusMinutes(passosTempo * 30);
+
+        for (Reserva r : agendamentos) {
+            if (r.getEstacao().getNumero() == estacao.getNumero()) {
+                LocalDateTime inicioExistente = r.getDatetime();
+                LocalDateTime fimExistente = r.getDatetime().plusMinutes(r.getPassosTempo() * 30);
+
+                boolean sobrepoe = (fimNova.isAfter(inicioExistente) && inicioNova.isBefore(fimExistente));
+                if (sobrepoe) {
+                    return false;
                 }
             }
         }

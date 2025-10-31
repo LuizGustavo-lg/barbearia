@@ -14,10 +14,13 @@ public class Atendimento {
     
     private String status[] = {"Pendente", "Em Espera", "Em Atendimento", "Concluído", "Cancelado"};
     private int statusAtual;
+    private int reservaId;
     
-    public Atendimento(){
+    public Atendimento(int reserva){
         this.statusAtual = 0;
         this.id = ++cont;
+        
+        this.reservaId = reserva;
     }
     
     public String getStatus(){
@@ -35,6 +38,14 @@ public class Atendimento {
     
     public void cancelarAtendimento(){
         this.statusAtual = 4;
+    }
+    
+    public boolean statusEqual(int s){
+        return statusAtual == s;
+    }
+    
+    public boolean statusEqual(String s){
+        return status.equals(s);
     }
 
     @Override

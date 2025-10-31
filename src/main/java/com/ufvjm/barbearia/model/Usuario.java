@@ -11,7 +11,7 @@ package com.ufvjm.barbearia.model;
 public class Usuario extends Pessoa{
     private String password;
     private static int cont;
-
+    
     public Usuario(String nome, String cpf, String telefone, String email, String endereco) {
         super(nome, cpf, telefone, email, endereco);
         super.id = ++cont;

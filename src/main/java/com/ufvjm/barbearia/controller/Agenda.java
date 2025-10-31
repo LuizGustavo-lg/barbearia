@@ -32,7 +32,7 @@ public class Agenda {
         return (0 == datetime.getMinute() || datetime.getMinute() == 30);
     }
     
-    public boolean addReserva(Cliente cliente, Estacao estacao, LocalDateTime datetime, Barbeiro barbeiro, int passosTempo){
+    public boolean addReserva(Cliente cliente, String descricao, Estacao estacao, LocalDateTime datetime, int passosTempo){
         
         if (!this.validarHorario(datetime)){
             return false;
@@ -42,7 +42,7 @@ public class Agenda {
             return false;
         }
         
-        agendamentos.add(new Reserva(cliente, estacao, datetime, barbeiro, passosTempo));
+        agendamentos.add(new Reserva(cliente, descricao, estacao, datetime, passosTempo));
         return true;
     }
     

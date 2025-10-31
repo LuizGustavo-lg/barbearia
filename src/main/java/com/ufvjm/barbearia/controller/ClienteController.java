@@ -29,7 +29,12 @@ public class ClienteController {
     }
     
     public Cliente getCliente(int id){
-        return clientes.get(id);
+        for (Cliente c : clientes){
+            if (c.getId() == id){
+                return c;
+            }
+        }
+        return null;
     }
     
     public boolean setClienteName(int id, String name){

@@ -8,7 +8,7 @@ package com.ufvjm.barbearia.model;
  *
  * @author kirito
  */
-public class Pessoa {
+abstract public class Pessoa {
     private String nome;
     private String cpf;
     private String telefone;

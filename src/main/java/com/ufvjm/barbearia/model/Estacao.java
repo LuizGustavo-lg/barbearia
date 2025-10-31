@@ -9,20 +9,12 @@ package com.ufvjm.barbearia.model;
  * @author Luiz Gustavo
  */
 public class Estacao {
-    private Barbeiro barbeiroResponsavel;
+    private String descricao;
     private int numero;
 
-    public Estacao(Barbeiro barbeiroResponsavel, int numero) {
-        this.barbeiroResponsavel = barbeiroResponsavel;
+    public Estacao(int numero, String descricao) {
         this.numero = numero;
-    }
-
-    public Barbeiro getBarbeiroResponsavel() {
-        return barbeiroResponsavel;
-    }
-
-    public void setBarbeiroResponsavel(Barbeiro barbeiroResponsavel) {
-        this.barbeiroResponsavel = barbeiroResponsavel;
+        this.descricao = descricao;
     }
 
     public int getNumero() {
@@ -33,9 +25,18 @@ public class Estacao {
         this.numero = numero;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     @Override
     public String toString() {
-        return "Estacao{" + "barbeiroResponsavel=" + barbeiroResponsavel + ", numero=" + numero + '}';
+        return "Estacao{" + "numero=" + numero + ", descricao=" + descricao + '}';
     }
+
         
 }

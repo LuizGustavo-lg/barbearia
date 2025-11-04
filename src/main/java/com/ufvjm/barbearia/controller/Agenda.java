@@ -4,7 +4,6 @@
  */
 package com.ufvjm.barbearia.controller;
 
-import com.ufvjm.barbearia.model.Barbeiro;
 import com.ufvjm.barbearia.model.Cliente;
 import com.ufvjm.barbearia.model.Estacao;
 import com.ufvjm.barbearia.model.Reserva;

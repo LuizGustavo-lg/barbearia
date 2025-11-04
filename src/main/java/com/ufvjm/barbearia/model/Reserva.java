@@ -16,7 +16,6 @@ public class Reserva {
     private Cliente cliente;
     private String descricao;
     private Estacao estacao;
-    private Barbeiro barbeiro;
     private LocalDateTime datetime;
     private int passosTempo;
 
@@ -56,14 +55,6 @@ public class Reserva {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public Barbeiro getBarbeiro() {
-        return barbeiro;
-    }
-
-    public void setBarbeiro(Barbeiro barbeiro) {
-        this.barbeiro = barbeiro;
     }
 
     public LocalDateTime getDatetime() {

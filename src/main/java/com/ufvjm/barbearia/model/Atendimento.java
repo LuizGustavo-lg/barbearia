@@ -14,6 +14,7 @@ public class Atendimento {
     
     private String status[] = {"Pendente", "Em Espera", "Em Atendimento", "Concluído", "Cancelado"};
     private int statusAtual;
+    private Barbeiro barbeiro;
     private int reservaId;
     
     public Atendimento(int reserva){
@@ -48,9 +49,25 @@ public class Atendimento {
         return status.equals(s);
     }
 
+    public Barbeiro getBarbeiro() {
+        return barbeiro;
+    }
+
+    public void setBarbeiro(Barbeiro barbeiro) {
+        this.barbeiro = barbeiro;
+    }
+
+    public int getReservaId() {
+        return reservaId;
+    }
+
+    public void setReservaId(int reservaId) {
+        this.reservaId = reservaId;
+    }
+
     @Override
     public String toString() {
-        return "Atendimento{" + "id=" + id + ", status=" + status + ", statusAtual=" + statusAtual + '}';
+        return "Atendimento{" + "id=" + id + ", status=" + status + ", statusAtual=" + statusAtual + ", barbeiro=" + barbeiro + ", reservaId=" + reservaId + '}';
     }
     
     

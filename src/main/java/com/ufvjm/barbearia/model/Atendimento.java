@@ -4,6 +4,9 @@
  */
 package com.ufvjm.barbearia.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author kirito
@@ -11,11 +14,15 @@ package com.ufvjm.barbearia.model;
 public class Atendimento {
     private int id;
     private static int cont;
-    
+
     private String status[] = {"Pendente", "Em Espera", "Em Atendimento", "Concluído", "Cancelado"};
     private int statusAtual;
-    private Barbeiro barbeiro;
+    
     private int reservaId;
+    private Barbeiro barbeiro;
+    private List <Servico> servicos = new ArrayList<Servico>();
+    private List <Produto> produtos = new ArrayList<Produto>();
+    
     
     public Atendimento(int reserva){
         this.statusAtual = 0;
@@ -64,6 +71,23 @@ public class Atendimento {
     public void setReservaId(int reservaId) {
         this.reservaId = reservaId;
     }
+
+    public List<Servico> getServicos() {
+        return servicos;
+    }
+
+    public void setServicos(Servico s) {
+        this.servicos.add(s);
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(Produto p) {
+        this.produtos.add(p);
+    }
+    
 
     @Override
     public String toString() {

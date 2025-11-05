@@ -48,6 +48,14 @@ public class OrdemDeServicoController {
                 .toList();
     }
     
+    public List<OrdemDeServico> buscarPorDia(int dia, int mes, int ano) {
+        return ordensDeServico.stream()
+                .filter(os -> os.getDatetime().getDayOfMonth() == dia &&
+                              os.getDatetime().getMonthValue() == mes &&
+                              os.getDatetime().getYear() == ano)
+                .toList();
+    }
+    
 
     public double calcularFaturamento(int mes, int ano) {
         return buscarPorMes(mes, ano).stream()

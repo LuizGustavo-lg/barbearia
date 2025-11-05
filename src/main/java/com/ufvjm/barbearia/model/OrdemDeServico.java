@@ -55,6 +55,7 @@ public class OrdemDeServico {
         
         this.datetime = LocalDateTime.now();
         this.id = ++count;
+        this.calcularValorTotal();
     }
 
     
@@ -70,6 +71,11 @@ public class OrdemDeServico {
         this.valorTotal = calcularItemVendavel(servicos) + calcularItemVendavel(produtos);
     }
     
+    
+    public int getId() {
+        return id;
+    }
+
     
     public void addServico(Servico s){
         servicos.add(s);
@@ -130,9 +136,6 @@ public class OrdemDeServico {
     public void setFormaPagamento(String formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
-    
-    
-    
     
 
     @Override

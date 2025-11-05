@@ -6,6 +6,7 @@ package com.ufvjm.barbearia.controller;
 
 import com.ufvjm.barbearia.model.Servico;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -29,19 +30,18 @@ public class ServicoController {
     }
     
     public List<Servico> getServicos(){
-        return servicos;   
+        return Collections.unmodifiableList(servicos);
     }
 
     public Servico getServico(int id){
-        return servicos.get(id);        
+        return servicos.stream()
+                .filter(s -> s.getId() == id)
+                .findFirst()
+                .orElseThrow();
     }
     
-    public Boolean removeServico(int id){
-        if (id < 0 || id >= this.servicos.size()){
-            return false;
-        } 
-        servicos.remove(id);
-        return true;
+    public void removeServico(int id){
+        servicos.remove(getServico(id));
     }
     
     @Override

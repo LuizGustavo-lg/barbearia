@@ -6,6 +6,7 @@ package com.ufvjm.barbearia.controller;
 
 import com.ufvjm.barbearia.model.Produto;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,30 +20,31 @@ public class Estoque {
     
     
     public void addNewProduto(String nome){
-        Produto p = new Produto(nome);
-        produtos.add(p);
+        this.addNewProduto(new Produto(nome));
     }
     
     
-    public void addNewProduto(String nome, float valor, String code){
-        Produto p = new Produto(nome, valor);
+    public void addNewProduto(String nome, float valor, String descr){
+        this.addNewProduto(new Produto(nome, valor, descr));
+    }
+    
+    public void addNewProduto(Produto p){
         produtos.add(p);
     }
 
     public List<Produto> getProdutos(){
-        return produtos;
+        return Collections.unmodifiableList(produtos);
     }
     
     public Produto getProduto(int id){
-        return produtos.get(id);        
+        return produtos.stream()
+                .filter(p -> p.getId() == id)
+                .findFirst()
+                .orElseThrow();
     }
     
-    public Boolean removeProduto(int id){
-        if (id < 0 || id >= this.produtos.size()){
-            return false;
-        } 
-        produtos.remove(id);
-        return true;
+    public void removeProduto(int id){
+        produtos.remove(getProduto(id));
     }
 
     @Override

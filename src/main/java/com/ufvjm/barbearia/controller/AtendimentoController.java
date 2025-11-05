@@ -9,6 +9,7 @@ import com.ufvjm.barbearia.model.Produto;
 import com.ufvjm.barbearia.model.Servico;
 import com.ufvjm.barbearia.utils.AtendimentoStatus;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -30,27 +31,20 @@ public class AtendimentoController {
     }
     
     public Atendimento getAtendimento(int id){
-        for (Atendimento a: atendimentos){
-            if(a.getId() == id){
-                return a;
-            }
-        }
-        return null;
+        return atendimentos.stream()
+            .filter(a -> a.getId() == id)
+            .findFirst()
+            .orElseThrow();
     }
     
     public List<Atendimento> getAtendimentos(){
-        return atendimentos;
+        return Collections.unmodifiableList(atendimentos);
     }
     
     public List<Atendimento> getAtendimentos(AtendimentoStatus s){
-        List<Atendimento> atendimentosStatus = new ArrayList<>();
-        for (Atendimento a : atendimentos){
-            if (a.getStatus().equals(s)){
-                atendimentosStatus.add(a);
-            }
-        }
-        
-        return atendimentosStatus;
+        return atendimentos.stream()
+            .filter(a -> a.getStatus() == s)
+            .toList();
     }
 
     public void setStatus(int id, AtendimentoStatus s){

@@ -5,8 +5,10 @@
 package com.ufvjm.barbearia.controller;
 
 import com.ufvjm.barbearia.model.Cliente;
+import com.ufvjm.barbearia.comparator.cliente.ClienteNomeComparator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,68 +27,18 @@ public class ClienteController {
     }
     
     public List<Cliente> getClientes(){
-        return clientes;
+        Collections.sort(clientes, new ClienteNomeComparator());
+        return Collections.unmodifiableList(clientes);
     }
+    
+    
     
     public Cliente getCliente(int id){
-        for (Cliente c : clientes){
-            if (c.getId() == id){
-                return c;
-            }
-        }
-        return null;
+        return clientes.stream().
+                filter(c -> c.getId() == id)
+                .findFirst()
+                .orElseThrow();
     }
-    
-    public boolean setClienteName(int id, String name){
-        if (id >= 0 && id < this.clientes.size()){
-            clientes.get(id).setNome(name);
-            return true;
-        } 
-        return false;
-    }
-    
-    public boolean setClienteTelefone(int id, String tel){
-        if (id >= 0 && id < this.clientes.size()){
-            clientes.get(id).setTelefone(tel);
-            return true;
-        } 
-        return false;
-    }
-    
-    public boolean setClienteEndereco(int id, String end){
-        if (id >= 0 && id < this.clientes.size()){
-            clientes.get(id).setEndereco(end);
-            return true;
-        } 
-        return false;
-    }
-    
-    public boolean setClienteEmail(int id, String email){
-        if (id >= 0 && id < this.clientes.size()){
-            clientes.get(id).setEmail(email);
-            return true;
-        } 
-        return false;
-    }
-    
-        
-    public boolean setClienteCpf(int id, String cpf){
-        if (id >= 0 && id < this.clientes.size()){
-            clientes.get(id).setCpf(cpf);
-            return true;
-        } 
-        return false;
-    }
-    
-    public boolean removeCliente(int id){
-        if (id >= 0 && id < this.clientes.size()){
-            clientes.remove(id);
-            return true;
-        } 
-        return false;
-    }
-    
-    
     
     @Override
     public String toString() {

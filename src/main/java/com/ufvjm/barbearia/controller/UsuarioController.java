@@ -8,6 +8,7 @@ import com.ufvjm.barbearia.model.Administrador;
 import com.ufvjm.barbearia.model.Funcionario;
 import com.ufvjm.barbearia.model.Usuario;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -31,67 +32,29 @@ public class UsuarioController {
     }
     
     public List<Usuario> getUsuarios() {
-        return usuarios;
+        return Collections.unmodifiableList(usuarios);
     }
 
     public Usuario getUsuario(int id){
-        return usuarios.get(id);
+        return usuarios.stream()
+                .filter(u -> u.getId() == id)
+                .findFirst()
+                .orElseThrow();
     }
     
-    public boolean setUsuarioPass(int id, String oldPass, String newPass){
-        if (id < 0 || id >= this.usuarios.size()){
-            return false;
-        } 
-        return usuarios.get(id).setPassword(oldPass, newPass);
-    }
-    
-    public boolean setUsuarioName(int id, String name){
-        if (id >= 0 && id < this.usuarios.size()){
-            usuarios.get(id).setNome(name);
-            return true;
-        } 
-        return false;
-    }
-    
-    public boolean setUsuarioTelefone(int id, String tel){
-        if (id >= 0 && id < this.usuarios.size()){
-            usuarios.get(id).setTelefone(tel);
-            return true;
-        }
-        return false;
-    }
-    
-    public boolean setUsuarioEndereco(int id, String end){
-        if (id >= 0 && id < this.usuarios.size()){
-            usuarios.get(id).setEndereco(end);
-            return true;
-        } 
-        return false;
-    }
-    
-    public boolean setUsuarioEmail(int id, String email){
-        if (id >= 0 && id < this.usuarios.size()){
-            usuarios.get(id).setEmail(email);
-            return true;
-        } 
-        return false;
-    }
-    
-        
-    public boolean setUsuarioCpf(int id, String cpf){
-        if (id >= 0 && id < this.usuarios.size()){
-            usuarios.get(id).setCpf(cpf);
-            return true;
-        } 
-        return false;
+    private long getQuantAdmins(){
+        return usuarios.stream()
+                .filter(u -> u.adminAcess() == true)
+                .count();
     }
     
     public boolean removeUsuario(int id){
-        if (id >= 0 && id < this.usuarios.size()){
-            usuarios.remove(id);
-            return true;
-        } 
-        return false;
+        Usuario u = getUsuario(id);
+        if (getQuantAdmins() <= 1){
+            return false;
+        }
+        usuarios.remove(u);
+        return true;
     }
 
     @Override

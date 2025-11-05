@@ -109,13 +109,10 @@ public class Agenda {
     }
     
     public Reserva getReserva(int id){
-        for (Reserva r : agendamentos){
-            if (r.getId() == id){
-                return r;
-            }
-        }
-        return null;
-        
+        return agendamentos.stream()
+                    .filter(r -> r.getId() == id)
+                    .findFirst()
+                    .orElseThrow();
     }
     
     public Atendimento iniciarAtendimento(int id) throws IllegalStateException{

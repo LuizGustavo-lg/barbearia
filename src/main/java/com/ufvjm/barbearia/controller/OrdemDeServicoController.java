@@ -17,12 +17,10 @@ public class OrdemDeServicoController {
     List<OrdemDeServico> ordensDeServico = new ArrayList<>();
     
     public OrdemDeServico getOrdemDeServico(int id){
-        for (OrdemDeServico o : ordensDeServico){
-            if (o.getId() == id){
-                return o;
-            }
-        }
-        throw new ArrayIndexOutOfBoundsException("Id não encontrado");
+        return ordensDeServico.stream()
+                .filter(o -> o.getId() == id)
+                .findFirst()
+                .orElseThrow();
     }
     
     public List<OrdemDeServico> getOrdensDeServico(){

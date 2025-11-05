@@ -18,15 +18,14 @@ public class ServicoController {
     public ServicoController(){}
     
     
-    public void addNewServico(String nome){
-        Servico p = new Servico(nome);
-        servicos.add(p);
+
+    
+    public void addNewServico(String nome, float valor, int pTempo){
+        addNewServico(new Servico(nome, valor, pTempo));
     }
     
-    
-    public void addNewServico(String nome, float valor, String code){
-        Servico p = new Servico(nome, valor);
-        servicos.add(p);
+    public void addNewServico(Servico s){
+        servicos.add(s);
     }
     
     public List<Servico> getServicos(){

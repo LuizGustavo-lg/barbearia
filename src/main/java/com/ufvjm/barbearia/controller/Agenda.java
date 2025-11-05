@@ -8,6 +8,7 @@ import com.ufvjm.barbearia.model.Atendimento;
 import com.ufvjm.barbearia.model.Cliente;
 import com.ufvjm.barbearia.model.Estacao;
 import com.ufvjm.barbearia.model.Reserva;
+import com.ufvjm.barbearia.model.Servico;
 import com.ufvjm.barbearia.utils.ReservaStatus;
 import com.ufvjm.barbearia.utils.AtendimentoStatus;
 import java.time.LocalDate;
@@ -34,8 +35,8 @@ public class Agenda {
         return (0 == datetime.getMinute() || datetime.getMinute() == 30);
     }
     
-    public boolean addReserva(Cliente cliente, String descricao, Estacao estacao, LocalDateTime datetime, int passosTempo){
-        return addReserva(new Reserva(cliente, descricao, estacao, datetime, passosTempo));
+    public boolean addReserva(Cliente cliente, String descricao, Estacao estacao, LocalDateTime datetime, Servico s){
+        return addReserva(new Reserva(cliente, descricao, estacao, datetime, s));
     }
     
     public boolean addReserva(Reserva r){
@@ -43,7 +44,7 @@ public class Agenda {
             return false;
         }
         
-        if (this.verificarHorarioAgenda(r.getDatetime(), r.getEstacao(), r.getPassosTempo())) {
+        if (this.verificarHorarioAgenda(r.getDatetime(), r.getEstacao(), r.getServicoPrevisto().getPassosTempo())) {
             agendamentos.add(r);
             r.setStatus(ReservaStatus.AGENDADO);
             
@@ -64,7 +65,7 @@ public class Agenda {
         for (Reserva r : agendamentos) {
             if (r.getEstacao().getNumero() == estacao.getNumero()) {
                 LocalDateTime inicioExistente = r.getDatetime();
-                LocalDateTime fimExistente = r.getDatetime().plusMinutes(r.getPassosTempo() * 30);
+                LocalDateTime fimExistente = r.getDatetime().plusMinutes(r.getServicoPrevisto().getPassosTempo() * 30);
 
                 boolean sobrepoe = (fimNova.isAfter(inicioExistente) && inicioNova.isBefore(fimExistente));
                 if (sobrepoe) {
@@ -114,10 +115,17 @@ public class Agenda {
         
     }
     
-    public Atendimento iniciarAtendimento(int id){
+    public Atendimento iniciarAtendimento(int id) throws IllegalStateException{
         Reserva r = getReserva(id);
+        
+        if (!r.getStatus().equals(ReservaStatus.AGENDADO)){
+            throw new IllegalStateException("Não é possível iniciar o atendimento. A reserva não está AGENDADA.");
+        }
+            
         r.setStatus(ReservaStatus.EM_ATENDIMENTO);
-        return new Atendimento(r.getId(), AtendimentoStatus.EM_ATENDIMENTO);
+        Atendimento a = new Atendimento(r.getId(), AtendimentoStatus.EM_ATENDIMENTO);
+        a.addServico(r.getServicoPrevisto());
+        return a;
     }
     
     @Override

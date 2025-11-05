@@ -10,20 +10,25 @@ package com.ufvjm.barbearia.model;
  */
 public class Servico extends ItemVendavel{
     private static int cont = 0;
+    private int passosTempo;
 
-    public Servico(String nome) {
-        super(nome);
-        super.id = ++cont;
-    }
-
-    public Servico(String nome, float valor) {
+    public Servico(String nome, float valor, int passosTempo) {
         super(nome, valor);
         super.id = ++cont;
+        this.passosTempo = passosTempo;
     }
 
-    public Servico(String nome, float valor, String descricao) {
+    public Servico(String nome, float valor, String descricao, int passosTempo) {
         super(nome, valor, descricao);
         super.id = ++cont;
+        this.passosTempo = passosTempo;
     }
-    
+
+    public int getPassosTempo() {
+        return passosTempo;
+    }
+
+    public void setPassosTempo(int passosTempo) {
+        this.passosTempo = passosTempo;
+    }
 }

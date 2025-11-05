@@ -19,24 +19,23 @@ public class Reserva {
     private String descricao;
     private Estacao estacao;
     private LocalDateTime datetime;
-    private int passosTempo;
     private ReservaStatus status;
-    
+    private Servico servicoPrevisto;
 
     
-    public Reserva(int id, Cliente cliente, String descricao, Estacao estacao, LocalDateTime datetime, int passosTempo) {
+    public Reserva(int id, Cliente cliente, String descricao, Estacao estacao, LocalDateTime datetime, Servico servico) {
         this.id = id;
         this.cliente = cliente;
         this.datetime = datetime;
-        this.passosTempo = passosTempo;
         this.descricao = descricao;
+        this.servicoPrevisto = servico;
     }
 
-    public Reserva(Cliente cliente, String descricao, Estacao estacao, LocalDateTime datetime, int passosTempo) {
+    public Reserva(Cliente cliente, String descricao, Estacao estacao, LocalDateTime datetime, Servico servico) {
         this.cliente = cliente;
         this.datetime = datetime;
-        this.passosTempo = passosTempo;
         this.descricao = descricao;
+        this.servicoPrevisto = servico;
         
         this.id = ++cont;
     }
@@ -77,14 +76,14 @@ public class Reserva {
         this.estacao = estacao;
     }
 
-
-    public int getPassosTempo() {
-        return passosTempo;
+    public Servico getServicoPrevisto() {
+        return servicoPrevisto;
     }
 
-    public void setPassosTempo(int passosTempo) {
-        this.passosTempo = passosTempo;
+    public void setServicoPrevisto(Servico servicoPrevisto) {
+        this.servicoPrevisto = servicoPrevisto;
     }
+    
 
     public ReservaStatus getStatus() {
         return status;
@@ -95,12 +94,9 @@ public class Reserva {
     }
 
     
-    
     @Override
     public String toString() {
-        return "Reserva{" + "id=" + id + ", cliente=" + cliente + ", descricao=" + descricao + ", datetime=" + datetime + ", passosTempo=" + passosTempo + '}';
+        return "Reserva{" + "id=" + id + ", cliente=" + cliente + ", descricao=" + descricao + ", estacao=" + estacao + ", datetime=" + datetime + ", status=" + status + ", servicoPrevisto=" + servicoPrevisto + '}';
     }
-    
-      
-    
+
 }

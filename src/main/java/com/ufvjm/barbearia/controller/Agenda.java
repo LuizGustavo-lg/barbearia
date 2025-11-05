@@ -25,14 +25,16 @@ import java.util.List;
  */
 public class Agenda {
     private List<Reserva> agendamentos = new ArrayList<>();
-    private Deque<Reserva> agendSecundario = new ArrayDeque<>();
+    private Deque<Reserva> pilhaDeEspera = new ArrayDeque<>();
 
     public Agenda() {
     }
     
     
-    private boolean validarHorario(LocalDateTime datetime){
-        return (0 == datetime.getMinute() || datetime.getMinute() == 30);
+    private void validarHorario(LocalDateTime datetime){
+        if (!(0 == datetime.getMinute() || datetime.getMinute() == 30)) {
+            throw new IllegalArgumentException("Minutos fora do espaco de tempo");
+        }
     }
     
     public boolean addReserva(Cliente cliente, String descricao, Estacao estacao, LocalDateTime datetime, Servico s){
@@ -40,36 +42,37 @@ public class Agenda {
     }
     
     public boolean addReserva(Reserva r){
-        if (!this.validarHorario(r.getDatetime())){
-            return false;
-        }
+        this.validarHorario(r.getDatetime());
         
         if (this.verificarHorarioAgenda(r.getDatetime(), r.getEstacao(), r.getServicoPrevisto().getPassosTempo())) {
-            agendamentos.add(r);
             r.setStatus(ReservaStatus.AGENDADO);
-            
-        } else {
-            agendSecundario.add(r);
-            r.setStatus(ReservaStatus.ESPERA);           
-            
+            agendamentos.add(r);
+            return true;
         }
         
-        return true;
+        return false;
     }
     
+    public void addPilhaDeEspera(Reserva r){
+        r.setStatus(ReservaStatus.ESPERA);
+        pilhaDeEspera.push(r);
+    }
+      
     
     public boolean verificarHorarioAgenda(LocalDateTime datetime, Estacao estacao, int passosTempo){
         LocalDateTime inicioNova = datetime;
         LocalDateTime fimNova = datetime.plusMinutes(passosTempo * 30);
 
         for (Reserva r : agendamentos) {
-            if (r.getEstacao().getNumero() == estacao.getNumero()) {
-                LocalDateTime inicioExistente = r.getDatetime();
-                LocalDateTime fimExistente = r.getDatetime().plusMinutes(r.getServicoPrevisto().getPassosTempo() * 30);
+            if (r.getStatus().equals(ReservaStatus.AGENDADO)){
+                if (r.getEstacao().getNumero() == estacao.getNumero()) {
+                    LocalDateTime inicioExistente = r.getDatetime();
+                    LocalDateTime fimExistente = r.getDatetime().plusMinutes(r.getServicoPrevisto().getPassosTempo() * 30);
 
-                boolean sobrepoe = (fimNova.isAfter(inicioExistente) && inicioNova.isBefore(fimExistente));
-                if (sobrepoe) {
-                    return false;
+                    boolean sobrepoe = (fimNova.isAfter(inicioExistente) && inicioNova.isBefore(fimExistente));
+                    if (sobrepoe) {
+                        return false;
+                    }
                 }
             }
         }
@@ -128,8 +131,22 @@ public class Agenda {
         return a;
     }
     
+    
+    public void cancelarAtendimento(int id){
+        Reserva r = getReserva(id);
+        
+        r.setStatus(ReservaStatus.CANCELADO);
+        
+        if (!pilhaDeEspera.isEmpty()){
+            Reserva newR = pilhaDeEspera.pop();
+            newR.setDatetime(r.getDatetime());
+            addReserva(newR);
+        }
+        
+    }
+    
     @Override
     public String toString() {
-        return "Agenda{" + "\nagendamentos=" + agendamentos + " \nagendSecundario=" + agendSecundario + '}';
+        return "Agenda{" + "\nagendamentos=" + agendamentos + " \nagendSecundario=" + pilhaDeEspera + '}';
     }
 }

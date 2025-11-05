@@ -4,9 +4,12 @@
  */
 package com.ufvjm.barbearia.controller;
 
+import com.ufvjm.barbearia.model.Atendimento;
 import com.ufvjm.barbearia.model.Cliente;
 import com.ufvjm.barbearia.model.Estacao;
 import com.ufvjm.barbearia.model.Reserva;
+import com.ufvjm.barbearia.utils.ReservaStatus;
+import com.ufvjm.barbearia.utils.AtendimentoStatus;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -32,16 +35,24 @@ public class Agenda {
     }
     
     public boolean addReserva(Cliente cliente, String descricao, Estacao estacao, LocalDateTime datetime, int passosTempo){
-        
-        if (!this.validarHorario(datetime)){
+        return addReserva(new Reserva(cliente, descricao, estacao, datetime, passosTempo));
+    }
+    
+    public boolean addReserva(Reserva r){
+        if (!this.validarHorario(r.getDatetime())){
             return false;
         }
         
-        if (!this.verificarHorarioAgenda(datetime, estacao, passosTempo)) {
-            return false;
+        if (this.verificarHorarioAgenda(r.getDatetime(), r.getEstacao(), r.getPassosTempo())) {
+            agendamentos.add(r);
+            r.setStatus(ReservaStatus.AGENDADO);
+            
+        } else {
+            agendSecundario.add(r);
+            r.setStatus(ReservaStatus.ESPERA);           
+            
         }
         
-        agendamentos.add(new Reserva(cliente, descricao, estacao, datetime, passosTempo));
         return true;
     }
     
@@ -91,6 +102,22 @@ public class Agenda {
             horariosDisp.add(horariosDispEstacao);
         }
         return horariosDisp;
+    }
+    
+    public Reserva getReserva(int id){
+        for (Reserva r : agendamentos){
+            if (r.getId() == id){
+                return r;
+            }
+        }
+        return null;
+        
+    }
+    
+    public Atendimento iniciarAtendimento(int id){
+        Reserva r = getReserva(id);
+        r.setStatus(ReservaStatus.EM_ATENDIMENTO);
+        return new Atendimento(r.getId(), AtendimentoStatus.EM_ATENDIMENTO);
     }
     
     @Override

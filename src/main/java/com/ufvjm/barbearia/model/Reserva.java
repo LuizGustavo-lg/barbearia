@@ -5,11 +5,13 @@
 package com.ufvjm.barbearia.model;
 
 import java.time.LocalDateTime;
+import com.ufvjm.barbearia.utils.ReservaStatus;
         
 /**
  *
  * @author kirito
  */
+
 public class Reserva {
     private int id;
     private static int cont;
@@ -18,6 +20,8 @@ public class Reserva {
     private Estacao estacao;
     private LocalDateTime datetime;
     private int passosTempo;
+    private ReservaStatus status;
+    
 
     
     public Reserva(int id, Cliente cliente, String descricao, Estacao estacao, LocalDateTime datetime, int passosTempo) {
@@ -82,6 +86,16 @@ public class Reserva {
         this.passosTempo = passosTempo;
     }
 
+    public ReservaStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ReservaStatus status) {
+        this.status = status;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "Reserva{" + "id=" + id + ", cliente=" + cliente + ", descricao=" + descricao + ", datetime=" + datetime + ", passosTempo=" + passosTempo + '}';

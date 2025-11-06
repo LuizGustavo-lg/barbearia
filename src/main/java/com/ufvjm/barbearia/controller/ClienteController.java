@@ -22,7 +22,10 @@ public class ClienteController {
     public ClienteController(){}
     
     public void addNewCliente(String nome, String cpf){
-        Cliente c = new Cliente(nome, cpf);
+        this.addNewCliente(new Cliente(nome, cpf));
+    }
+    
+    public void addNewCliente(Cliente c){
         clientes.add(c);
     }
     

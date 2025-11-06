@@ -20,19 +20,29 @@ public class UsuarioController {
     private List<Usuario> usuarios = new ArrayList<>();
     
     public UsuarioController(){}
+    
+    public void addNewUsuario(Usuario u){
+        usuarios.add(u);
+    }
 
     public void addNewFuncionario(String nome, String cpf){
         Usuario f = new Funcionario(nome, cpf);
-        usuarios.add(f);
+        this.addNewUsuario(f);
     }
     
     public void addNewAdministrador(String nome, String cpf){
         Usuario f = new Administrador(nome, cpf);
-        usuarios.add(f);
+        this.addNewUsuario(f);
     }
     
     public List<Usuario> getUsuarios() {
         return Collections.unmodifiableList(usuarios);
+    }
+    
+    public List<Usuario> getUsuarios(String nome) {
+        return usuarios.stream()
+                .filter(u -> u.getNome().contains(nome))
+                .toList();
     }
 
     public Usuario getUsuario(int id){

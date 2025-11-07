@@ -8,11 +8,10 @@ package com.ufvjm.barbearia.model;
  *
  * @author kirito
  */
-public class ItemVendavel {
+public class ItemVendavel extends EntidadeBaseId{
     private String nome;
     private float valor;
     private String descricao;
-    protected int id;
     
     public ItemVendavel(String nome) {
         this.nome = nome;
@@ -24,6 +23,7 @@ public class ItemVendavel {
     }
 
     public ItemVendavel(String nome, float valor, String descricao) {
+        super();
         this.nome = nome;
         this.valor = valor;
         this.descricao = descricao;

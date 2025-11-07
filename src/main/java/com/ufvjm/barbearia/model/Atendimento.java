@@ -12,10 +12,7 @@ import com.ufvjm.barbearia.utils.AtendimentoStatus;
  *
  * @author kirito
  */
-public class Atendimento {
-    private int id;
-    private static int cont;
-
+public class Atendimento extends EntidadeBaseId{
     private AtendimentoStatus status;
     private int statusAtual = 0;
     
@@ -26,16 +23,15 @@ public class Atendimento {
     
     
     public Atendimento(int reserva, AtendimentoStatus s){
+        super();
         this.statusAtual = 0;
-        this.id = ++cont;
+
         
         this.reservaId = reserva;
         this.status = s;
     }
     
-    public int getId(){
-        return id;
-    }
+
     
     public AtendimentoStatus getStatus(){
         return status;
@@ -85,12 +81,14 @@ public class Atendimento {
     public void addProduto(Produto p) {
         this.produtos.add(p);
     }
-    
 
     @Override
     public String toString() {
-        return "Atendimento{" + "id=" + id + ", status=" + status + ", statusAtual=" + statusAtual + ", barbeiro=" + barbeiro + ", reservaId=" + reservaId + '}';
+        return "Atendimento{" + "status=" + status + ", statusAtual=" + statusAtual + ", reservaId=" + reservaId + ", barbeiro=" + barbeiro + ", servicos=" + servicos + ", produtos=" + produtos + '}';
     }
+    
+
+
     
     
 }

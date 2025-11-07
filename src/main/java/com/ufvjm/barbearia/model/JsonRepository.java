@@ -32,7 +32,23 @@ public class JsonRepository<T> {
         try (FileReader reader = new FileReader(caminho)) {
             Type listType = TypeToken.getParameterized(List.class, tipo).getType();
             List<T> lista = gson.fromJson(reader, listType);
-            return lista != null ? lista : new ArrayList<>();
+            
+            if (lista == null) {
+                lista = new ArrayList<>();
+            }
+            
+            
+            if (!lista.isEmpty() && lista.get(0) instanceof EntidadeBaseId entidade) {
+            // pega o maior ID na lista
+            int maxId = lista.stream()
+                    .mapToInt(obj -> ((EntidadeBaseId) obj).getId())
+                    .max()
+                    .orElse(0);
+            // atualiza o contador global
+            IdGenerator.sincronizarClasse(tipo, maxId);
+        }
+            
+            return lista;
         } catch (IOException e) {
             return new ArrayList<>();
         }

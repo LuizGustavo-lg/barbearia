@@ -12,9 +12,7 @@ import java.util.List;
  *
  * @author kirito
  */
-public class OrdemDeServico {
-    private int id;
-    static int count;
+public class OrdemDeServico extends EntidadeBaseId{
     private Cliente cliente;
     private Barbeiro barbeiro;
     private List<ItemVendavel> servicos;
@@ -23,18 +21,9 @@ public class OrdemDeServico {
     private LocalDateTime datetime;
     private String formaPagamento;
 
-    public OrdemDeServico(int id, Cliente cliente, Barbeiro barbeiro, List<Servico> servicos, List<Produto> produtos, double valorTotal, LocalDateTime datetime, String formaPagamento) {
-        this.id = id;
-        this.cliente = cliente;
-        this.barbeiro = barbeiro;
-        this.servicos = new ArrayList<>(servicos);
-        this.produtos = new ArrayList<>(produtos);
-        this.valorTotal = valorTotal;
-        this.datetime = datetime;
-        this.formaPagamento = formaPagamento;
-    }
 
     public OrdemDeServico(Cliente cliente, Barbeiro barbeiro, List<Servico> servicos, List<Produto> produtos, double valorTotal, LocalDateTime datetime, String formaPagamento) {
+        super();
         this.cliente = cliente;
         this.barbeiro = barbeiro;
         this.servicos = new ArrayList<>(servicos);
@@ -42,11 +31,10 @@ public class OrdemDeServico {
         this.valorTotal = valorTotal;
         this.datetime = datetime;
         this.formaPagamento = formaPagamento;
-        
-        this.id = ++count;
     }
 
     public OrdemDeServico(Cliente cliente, Barbeiro barbeiro, List<Servico> servicos, List<Produto> produtos, String formaPagamento) {
+        super();
         this.cliente = cliente;
         this.barbeiro = barbeiro;
         this.servicos = new ArrayList<>(servicos);
@@ -54,7 +42,6 @@ public class OrdemDeServico {
         this.formaPagamento = formaPagamento;
         
         this.datetime = LocalDateTime.now();
-        this.id = ++count;
         this.calcularValorTotal();
     }
 

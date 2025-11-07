@@ -8,7 +8,7 @@ package com.ufvjm.barbearia.model;
  *
  * @author kirito
  */
-public class BalancoMensal {
+public class BalancoMensal extends EntidadeBaseId{
     private int mes;
     private int ano;
     private double receitas;
@@ -16,6 +16,7 @@ public class BalancoMensal {
     private double lucroLiquido;
 
     public BalancoMensal(int mes, int ano, double receitas, double despesas) {
+        super();
         this.mes = mes;
         this.ano = ano;
         this.receitas = receitas;

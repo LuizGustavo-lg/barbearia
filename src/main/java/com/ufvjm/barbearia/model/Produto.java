@@ -10,21 +10,17 @@ package com.ufvjm.barbearia.model;
  */
 public class Produto extends ItemVendavel{
     private int quantidade;
-    private static int cont = 0;
     
     public Produto(String nome) {
         super(nome);
-        super.id = ++cont;
     }
 
     public Produto(String nome, float valor) {
         super(nome, valor);
-        super.id = ++cont;
     }
 
     public Produto(String nome, float valor, String descricao) {
         super(nome, valor, descricao);
-        super.id = ++cont;
     }
 
     public int getQuantidade() {

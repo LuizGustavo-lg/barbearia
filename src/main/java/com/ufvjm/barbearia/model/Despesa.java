@@ -10,37 +10,22 @@ import java.time.LocalDateTime;
  *
  * @author kirito
  */
-public class Despesa {
-    private int id;
-    private static int count;
-    
+public class Despesa extends EntidadeBaseId{
     private String nome;
     private double valor;
     private LocalDateTime datetime;
     private String descricao;
 
-    public Despesa(int id, String nome, double valor, LocalDateTime datetime, String descricao) {
-        this.id = id;
-        this.nome = nome;
-        this.valor = valor;
-        this.datetime = datetime;
-        this.descricao = descricao;
-    }
 
     public Despesa(String nome, double valor, LocalDateTime datetime, String descricao) {
+        super();
         this.nome = nome;
         this.valor = valor;
         this.datetime = datetime;
         this.descricao = descricao;
-        
-        id = ++count;
-    }
 
-    public int getId() {
-        return id;
     }
     
-
     public String getNome() {
         return nome;
     }

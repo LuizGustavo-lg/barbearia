@@ -8,13 +8,12 @@ package com.ufvjm.barbearia.model;
  *
  * @author kirito
  */
-abstract public class Pessoa {
+abstract public class Pessoa extends EntidadeBaseId{
     private String nome;
     private String cpf;
     private String telefone;
     private String email;
     private String endereco;
-    protected int id;
 
     public Pessoa(String nome, String cpf) {
         this.nome = nome;
@@ -28,20 +27,12 @@ abstract public class Pessoa {
     }
 
     public Pessoa(String nome, String cpf, String telefone, String email, String endereco) {
+        super();
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
         this.email = email;
         this.endereco = endereco;
-    }
-
-    public Pessoa(String nome, String cpf, String telefone, String email, String endereco, int id) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.telefone = telefone;
-        this.email = email;
-        this.endereco = endereco;
-        this.id = id;
     }
 
     
@@ -50,7 +41,8 @@ abstract public class Pessoa {
         this.nome = nome;
     }
     
-    public Pessoa(){}
+    public Pessoa(){
+    }
     
     public String getNome() {
         return nome;
@@ -92,13 +84,6 @@ abstract public class Pessoa {
         this.endereco = endereco;
     }
 
-    public int getId() {
-        return id;
-    }
-    
-    public void setId(int id){
-        this.id = id;
-    }
 
     @Override
     public String toString() {

@@ -12,9 +12,7 @@ import com.ufvjm.barbearia.utils.ReservaStatus;
  * @author kirito
  */
 
-public class Reserva {
-    private int id;
-    private static int cont;
+public class Reserva extends EntidadeBaseId{
     private Cliente cliente;
     private String descricao;
     private Estacao estacao;
@@ -23,25 +21,12 @@ public class Reserva {
     private Servico servicoPrevisto;
 
     
-    public Reserva(int id, Cliente cliente, String descricao, Estacao estacao, LocalDateTime datetime, Servico servico) {
-        this.id = id;
-        this.cliente = cliente;
-        this.datetime = datetime;
-        this.descricao = descricao;
-        this.servicoPrevisto = servico;
-    }
-
     public Reserva(Cliente cliente, String descricao, Estacao estacao, LocalDateTime datetime, Servico servico) {
+        super();
         this.cliente = cliente;
         this.datetime = datetime;
         this.descricao = descricao;
         this.servicoPrevisto = servico;
-        
-        this.id = ++cont;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public Cliente getCliente() {
@@ -96,7 +81,7 @@ public class Reserva {
         
     @Override
     public String toString() {
-        return "Reserva{" + "id=" + id + ", cliente=" + cliente + ", descricao=" + descricao + ", estacao=" + estacao + ", datetime=" + datetime + ", status=" + status + ", servicoPrevisto=" + servicoPrevisto + '}';
+        return "Reserva{" + ", cliente=" + cliente + ", descricao=" + descricao + ", estacao=" + estacao + ", datetime=" + datetime + ", status=" + status + ", servicoPrevisto=" + servicoPrevisto + '}';
     }
 
 }

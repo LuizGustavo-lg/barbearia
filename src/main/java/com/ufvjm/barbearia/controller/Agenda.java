@@ -7,7 +7,6 @@ package com.ufvjm.barbearia.controller;
 import com.ufvjm.barbearia.model.Atendimento;
 import com.ufvjm.barbearia.model.Cliente;
 import com.ufvjm.barbearia.model.Estacao;
-import com.ufvjm.barbearia.model.OrdemDeServico;
 import com.ufvjm.barbearia.model.Reserva;
 import com.ufvjm.barbearia.model.Servico;
 import com.ufvjm.barbearia.utils.ReservaStatus;

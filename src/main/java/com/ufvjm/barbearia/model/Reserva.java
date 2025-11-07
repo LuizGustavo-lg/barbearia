@@ -93,7 +93,7 @@ public class Reserva {
         this.status = status;
     }
 
-    
+        
     @Override
     public String toString() {
         return "Reserva{" + "id=" + id + ", cliente=" + cliente + ", descricao=" + descricao + ", estacao=" + estacao + ", datetime=" + datetime + ", status=" + status + ", servicoPrevisto=" + servicoPrevisto + '}';

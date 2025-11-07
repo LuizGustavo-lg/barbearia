@@ -7,6 +7,7 @@ package com.ufvjm.barbearia.controller;
 import com.ufvjm.barbearia.model.Atendimento;
 import com.ufvjm.barbearia.model.Cliente;
 import com.ufvjm.barbearia.model.Estacao;
+import com.ufvjm.barbearia.model.OrdemDeServico;
 import com.ufvjm.barbearia.model.Reserva;
 import com.ufvjm.barbearia.model.Servico;
 import com.ufvjm.barbearia.utils.ReservaStatus;
@@ -129,7 +130,7 @@ public class Agenda {
     }
     
     
-    public void cancelarAtendimento(int id){
+    public Atendimento cancelarReserva(int id){
         Reserva r = getReserva(id);
         
         r.setStatus(ReservaStatus.CANCELADO);
@@ -139,8 +140,10 @@ public class Agenda {
             newR.setDatetime(r.getDatetime());
             addReserva(newR);
         }
-        
-    }
+        Atendimento a = new Atendimento(r.getId(), AtendimentoStatus.CANCELADO);
+        a.addServico(new Servico("Serviço Cancelado", (float) (r.getServicoPrevisto().getValor()*0.35), 0));
+        return a;
+    }   
     
     @Override
     public String toString() {

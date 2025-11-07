@@ -17,8 +17,13 @@ public class Administrador extends Usuario{
     public Administrador(String nome, String cpf) {
         super(nome, cpf);
     }
-    
 
+    public Administrador(String nome, String cpf, String telefone, String email, String endereco, int id) {
+        super(nome, cpf, telefone, email, endereco, id);
+    }
+    
+    public Administrador(){};
+    
     @Override
     public boolean adminAcess(){
         return true;

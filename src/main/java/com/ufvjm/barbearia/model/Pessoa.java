@@ -35,10 +35,22 @@ abstract public class Pessoa {
         this.endereco = endereco;
     }
 
+    public Pessoa(String nome, String cpf, String telefone, String email, String endereco, int id) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.email = email;
+        this.endereco = endereco;
+        this.id = id;
+    }
+
+    
+    
     public Pessoa(String nome) {
         this.nome = nome;
     }
     
+    public Pessoa(){}
     
     public String getNome() {
         return nome;
@@ -82,6 +94,10 @@ abstract public class Pessoa {
 
     public int getId() {
         return id;
+    }
+    
+    public void setId(int id){
+        this.id = id;
     }
 
     @Override

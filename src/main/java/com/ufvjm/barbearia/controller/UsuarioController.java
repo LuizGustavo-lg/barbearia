@@ -7,6 +7,7 @@ package com.ufvjm.barbearia.controller;
 import com.ufvjm.barbearia.model.Administrador;
 import com.ufvjm.barbearia.model.Funcionario;
 import com.ufvjm.barbearia.model.Usuario;
+import com.ufvjm.barbearia.model.JsonRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,21 +19,43 @@ import java.util.List;
  */
 public class UsuarioController {
     private List<Usuario> usuarios = new ArrayList<>();
+    private JsonRepository<Funcionario> repoF;
+    private JsonRepository<Administrador> repoA;
     
-    public UsuarioController(){}
+    public UsuarioController(){
+        repoF = new JsonRepository<>("data/funcionarios.json", Funcionario.class);
+        repoA = new JsonRepository<>("data/administradores.json", Administrador.class);
+        
+        this.carregar();
+    }
     
     public void addNewUsuario(Usuario u){
         usuarios.add(u);
-    }
-
-    public void addNewFuncionario(String nome, String cpf){
-        Usuario f = new Funcionario(nome, cpf);
-        this.addNewUsuario(f);
+        this.save();
     }
     
-    public void addNewAdministrador(String nome, String cpf){
-        Usuario f = new Administrador(nome, cpf);
-        this.addNewUsuario(f);
+    
+    public void save(){
+        List<Funcionario> f = new ArrayList<>();
+        List<Administrador> a = new ArrayList<>();
+
+        
+        for (Usuario u: usuarios){
+            if(u instanceof Administrador admin){
+                a.add(admin);
+            } else if (u instanceof Funcionario func){
+                f.add(func);
+            }
+        }
+        
+        repoA.salvar(a);
+        repoF.salvar(f);
+    }
+    
+    public void carregar(){
+        usuarios.clear();
+        usuarios.addAll(repoA.carregar());
+        usuarios.addAll(repoF.carregar());
     }
     
     public List<Usuario> getUsuarios() {
@@ -71,5 +94,5 @@ public class UsuarioController {
     public String toString() {
         return "UsuarioController{" + "usuarios=" + usuarios + '}';
     }
-    
+   
 }

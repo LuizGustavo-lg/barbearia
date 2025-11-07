@@ -83,10 +83,14 @@ public class UsuarioController {
     
     public boolean removeUsuario(int id){
         Usuario u = getUsuario(id);
-        if (getQuantAdmins() <= 1){
-            return false;
+        if (u.adminAcess()){
+            if (getQuantAdmins() <= 1){
+                return false;
+            }        
         }
+        
         usuarios.remove(u);
+        save();
         return true;
     }
 

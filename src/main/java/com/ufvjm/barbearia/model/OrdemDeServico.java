@@ -4,6 +4,7 @@
  */
 package com.ufvjm.barbearia.model;
 
+import com.ufvjm.barbearia.utils.PagamentoStatus;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +20,13 @@ public class OrdemDeServico extends EntidadeBaseId{
     private List<ItemVendavel> produtos;
     private double valorTotal;
     private LocalDateTime datetime;
-    private String formaPagamento;
+    private Pagamento pagamento;
 
+    
+    public OrdemDeServico() {
+    }
 
-    public OrdemDeServico(Cliente cliente, Barbeiro barbeiro, List<Servico> servicos, List<Produto> produtos, double valorTotal, LocalDateTime datetime, String formaPagamento) {
+    public OrdemDeServico(Cliente cliente, Barbeiro barbeiro, List<Servico> servicos, List<Produto> produtos, double valorTotal, LocalDateTime datetime, Pagamento pagamento) {
         super();
         this.cliente = cliente;
         this.barbeiro = barbeiro;
@@ -30,16 +34,16 @@ public class OrdemDeServico extends EntidadeBaseId{
         this.produtos = new ArrayList<>(produtos);
         this.valorTotal = valorTotal;
         this.datetime = datetime;
-        this.formaPagamento = formaPagamento;
+        this.pagamento = pagamento;
     }
 
-    public OrdemDeServico(Cliente cliente, Barbeiro barbeiro, List<Servico> servicos, List<Produto> produtos, String formaPagamento) {
+    public OrdemDeServico(Cliente cliente, Barbeiro barbeiro, List<Servico> servicos, List<Produto> produtos, Pagamento pagamento) {
         super();
         this.cliente = cliente;
         this.barbeiro = barbeiro;
         this.servicos = new ArrayList<>(servicos);
         this.produtos = new ArrayList<>(produtos);
-        this.formaPagamento = formaPagamento;
+        this.pagamento = pagamento;
         
         this.datetime = LocalDateTime.now();
         this.calcularValorTotal();
@@ -63,6 +67,14 @@ public class OrdemDeServico extends EntidadeBaseId{
         return id;
     }
 
+    
+    public void ralizarPagamento(){
+        if (pagamento.getStatusPagamento().equals(PagamentoStatus.PAGO)){
+            throw new IllegalStateException("Pagamento já realizado");
+        } 
+        
+        pagamento.processarPagamento(this.getValorTotal());
+    }
     
     public void addServico(Servico s){
         servicos.add(s);
@@ -105,6 +117,7 @@ public class OrdemDeServico extends EntidadeBaseId{
     }
 
     public double getValorTotal() {
+        this.calcularValorTotal();
         return valorTotal;
     }
 
@@ -116,17 +129,16 @@ public class OrdemDeServico extends EntidadeBaseId{
         this.datetime = datetime;
     }
 
-    public String getFormaPagamento() {
-        return formaPagamento;
+    public Pagamento getPagamento() {
+        return pagamento;
     }
 
-    public void setFormaPagamento(String formaPagamento) {
-        this.formaPagamento = formaPagamento;
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
     }
-    
 
     @Override
     public String toString() {
-        return "OrdemDeServico{" + "id=" + id + ", cliente=" + cliente + ", barbeiro=" + barbeiro + ", servicos=" + servicos + ", produtos=" + produtos + ", valorTotal=" + valorTotal + ", datetime=" + datetime + ", formaPagamento=" + formaPagamento + '}';
+        return "OrdemDeServico{" + "cliente=" + cliente + ", barbeiro=" + barbeiro + ", servicos=" + servicos + ", produtos=" + produtos + ", valorTotal=" + valorTotal + ", datetime=" + datetime + ", pagamento=" + pagamento + '}';
     }
 }

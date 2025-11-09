@@ -4,15 +4,25 @@
  */
 package com.ufvjm.barbearia.model;
 
+import com.ufvjm.barbearia.utils.PagamentoStatus;
+
 /**
  *
  * @author kirito
  */
 public class PagamentoPix implements Pagamento{
+    private PagamentoStatus status = PagamentoStatus.PENDENTE;
+
 
     @Override
     public void processarPagamento(double valor) {
+        status = PagamentoStatus.PAGO;
         System.out.printf("Pagamento Pix processado no valor de R$ %.2f \n", valor);
+    }
+
+    @Override
+    public PagamentoStatus getStatusPagamento() {
+        return status;
     }
 
 }

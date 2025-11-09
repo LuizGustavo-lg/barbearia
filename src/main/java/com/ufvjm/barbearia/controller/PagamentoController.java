@@ -16,7 +16,7 @@ import com.ufvjm.barbearia.model.PagamentoFactory.PagamentoPixFactory;
  */
 public class PagamentoController {
     
-    public void realizarPagamento(int tipo, double valor){
+    public Pagamento getPagamento(int tipo){
         PagamentoFactory factory;
         
         switch (tipo) {
@@ -29,6 +29,6 @@ public class PagamentoController {
         }
         
         Pagamento pagamento = factory.criarPagamento();
-        pagamento.processarPagamento(valor);
+        return pagamento;
     }
 }

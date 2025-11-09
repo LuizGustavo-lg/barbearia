@@ -4,10 +4,14 @@
  */
 package com.ufvjm.barbearia.model;
 
+import com.ufvjm.barbearia.utils.PagamentoStatus;
+
 /**
  *
  * @author kirito
  */
 public interface Pagamento {
     void processarPagamento(double valor);
+    
+    PagamentoStatus getStatusPagamento();
 }

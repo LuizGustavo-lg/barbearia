@@ -10,8 +10,8 @@ package com.ufvjm.barbearia.model;
  */
 public class Administrador extends Usuario{
 
-    public Administrador(String nome, String cpf, String telefone, String email, String endereco, String pass) {
-        super(nome, cpf, telefone, email, endereco, pass);
+    public Administrador(String nome, String cpf, String telefone, String email, String endereco, String pass, String username) {
+        super(nome, cpf, telefone, email, endereco, pass, username);
     }
 
     public Administrador(String nome, String cpf) {

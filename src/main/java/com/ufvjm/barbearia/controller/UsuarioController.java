@@ -5,6 +5,7 @@
 package com.ufvjm.barbearia.controller;
 
 import com.ufvjm.barbearia.model.Administrador;
+import com.ufvjm.barbearia.model.Altenticador;
 import com.ufvjm.barbearia.model.Funcionario;
 import com.ufvjm.barbearia.model.Usuario;
 import com.ufvjm.barbearia.model.JsonRepository;
@@ -93,6 +94,19 @@ public class UsuarioController {
         return true;
     }
 
+    public boolean login(String username, String senha) {
+    Usuario encontrado = usuarios.stream()
+            .filter(u -> u.getUsername().equals(username) && u.verifyPassword(senha))
+            .findFirst()
+            .orElse(null);
+
+        if (encontrado == null) {
+            return false;
+        }
+        Altenticador.login(encontrado);
+        return true;
+    }
+    
     @Override
     public String toString() {
         return "UsuarioController{" + "usuarios=" + usuarios + '}';

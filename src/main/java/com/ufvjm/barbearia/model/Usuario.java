@@ -10,17 +10,27 @@ package com.ufvjm.barbearia.model;
  */
 public class Usuario extends Pessoa{
     private String password;
+    private String username;
     
     public Usuario(){
     }
     
-    public Usuario(String nome, String cpf, String telefone, String email, String endereco, String pass) {
+    public Usuario(String nome, String cpf, String telefone, String email, String endereco, String pass, String username) {
         super(nome, cpf, telefone, email, endereco);
         this.password = pass;
+        this.username = username;
     }
     
     public Usuario(String nome, String cpf) {
         super(nome, cpf);
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public boolean verifyPassword(String pass){

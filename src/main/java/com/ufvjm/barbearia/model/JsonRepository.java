@@ -15,7 +15,6 @@ import com.fatboyindustrial.gsonjavatime.Converters;
 public class JsonRepository<T> {
     private final String caminho;
     private final Class<T> tipo;
-//    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private Gson gson = Converters.registerAll(new GsonBuilder())
     .setPrettyPrinting()
     .create();
@@ -44,14 +43,14 @@ public class JsonRepository<T> {
             
             
             if (!lista.isEmpty() && lista.get(0) instanceof EntidadeBaseId entidade) {
-            // pega o maior ID na lista
-            int maxId = lista.stream()
-                    .mapToInt(obj -> ((EntidadeBaseId) obj).getId())
-                    .max()
-                    .orElse(0);
-            // atualiza o contador global
-            IdGenerator.sincronizarClasse(tipo, maxId);
-        }
+                // pega o maior ID na lista
+                int maxId = lista.stream()
+                        .mapToInt(obj -> ((EntidadeBaseId) obj).getId())
+                        .max()
+                        .orElse(0);
+                // atualiza o contador global
+                IdGenerator.sincronizarClasse(tipo, maxId);
+            }
             
             return lista;
         } catch (IOException e) {

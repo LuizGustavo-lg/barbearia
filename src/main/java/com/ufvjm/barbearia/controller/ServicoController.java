@@ -4,6 +4,7 @@
  */
 package com.ufvjm.barbearia.controller;
 
+import com.ufvjm.barbearia.model.JsonRepository;
 import com.ufvjm.barbearia.model.Servico;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,11 +16,22 @@ import java.util.List;
  */
 public class ServicoController {
     private List<Servico> servicos = new ArrayList<>();
+    private JsonRepository<Servico> repo;
     
-    public ServicoController(){}
+    public ServicoController(){
+        repo = new JsonRepository<>("data/servicos.json", Servico.class);
+        this.carregar();
+    }
     
     
-
+    public void save(){
+        repo.salvar(servicos);
+    }
+    
+    public void carregar(){
+        servicos.clear();
+        servicos.addAll(repo.carregar());
+    }
     
     public void addNewServico(String nome, float valor, int pTempo){
         addNewServico(new Servico(nome, valor, pTempo));

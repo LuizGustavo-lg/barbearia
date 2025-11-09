@@ -7,6 +7,7 @@ package com.ufvjm.barbearia.controller;
 import com.ufvjm.barbearia.model.Atendimento;
 import com.ufvjm.barbearia.model.Cliente;
 import com.ufvjm.barbearia.model.Estacao;
+import com.ufvjm.barbearia.model.JsonRepository;
 import com.ufvjm.barbearia.model.Reserva;
 import com.ufvjm.barbearia.model.Servico;
 import com.ufvjm.barbearia.utils.ReservaStatus;
@@ -26,10 +27,21 @@ import java.util.List;
 public class Agenda {
     private List<Reserva> agendamentos = new ArrayList<>();
     private Deque<Reserva> pilhaDeEspera = new ArrayDeque<>();
+    private JsonRepository<Reserva> repo;
 
     public Agenda() {
+        repo = new JsonRepository<>("data/agendamentos.json", Reserva.class);
+        this.carregar();
     }
     
+    public void save(){
+        repo.salvar(agendamentos);
+    }
+    
+    public void carregar(){
+        agendamentos.clear();
+        agendamentos.addAll(repo.carregar());
+    }
     
     private void validarHorario(LocalDateTime datetime){
         if (!(0 == datetime.getMinute() || datetime.getMinute() == 30)) {

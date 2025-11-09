@@ -4,6 +4,7 @@
  */
 package com.ufvjm.barbearia.controller;
 
+import com.ufvjm.barbearia.model.JsonRepository;
 import com.ufvjm.barbearia.model.Produto;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,8 +16,22 @@ import java.util.List;
  */
 public class Estoque {
     private List<Produto> produtos = new ArrayList<>();
+    private JsonRepository<Produto> repo;
     
-    public Estoque(){}
+    public Estoque(){
+        repo = new JsonRepository<>("data/produtos.json", Produto.class);
+        this.carregar();
+    }
+    
+    public void save(){
+        repo.salvar(produtos);
+    }
+    
+    public void carregar(){
+        produtos.clear();
+        produtos.addAll(repo.carregar());
+    }
+    
     
     
     public void addNewProduto(String nome){

@@ -4,6 +4,7 @@
  */
 package com.ufvjm.barbearia.controller;
 
+import com.ufvjm.barbearia.model.JsonRepository;
 import com.ufvjm.barbearia.model.OrdemDeServico;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,7 +15,13 @@ import java.util.List;
  * @author kirito
  */
 public class OrdemDeServicoController {
-    List<OrdemDeServico> ordensDeServico = new ArrayList<>();
+    private List<OrdemDeServico> ordensDeServico = new ArrayList<>();
+    private JsonRepository<OrdemDeServico> repo;
+
+    public OrdemDeServicoController() {
+        repo = new JsonRepository<>("data/ordensdeservico.json", OrdemDeServico.class);
+        this.carregar();
+    }
     
     public OrdemDeServico getOrdemDeServico(int id){
         return ordensDeServico.stream()
@@ -22,6 +29,16 @@ public class OrdemDeServicoController {
                 .findFirst()
                 .orElseThrow();
     }
+    
+    public void save(){
+        repo.salvar(ordensDeServico);
+    }
+    
+    public void carregar(){
+        ordensDeServico.clear();
+        ordensDeServico.addAll(repo.carregar());
+    }
+    
     
     public List<OrdemDeServico> getOrdensDeServico(){
         return Collections.unmodifiableList(ordensDeServico);

@@ -5,6 +5,7 @@
 package com.ufvjm.barbearia.controller;
 
 import com.ufvjm.barbearia.model.Despesa;
+import com.ufvjm.barbearia.model.JsonRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,8 +15,24 @@ import java.util.List;
  * @author kirito
  */
 public class DespesasController {
-    List<Despesa> despesas = new ArrayList<>();
+    private List<Despesa> despesas = new ArrayList<>();
+    private JsonRepository<Despesa> repo;
     
+    public DespesasController() {
+        repo = new JsonRepository<>("data/despesas.json", Despesa.class);
+        this.carregar();
+    }
+    
+    public void save(){
+        repo.salvar(despesas);
+    }
+    
+    public void carregar(){
+        despesas.clear();
+        despesas.addAll(repo.carregar());
+    }
+    
+        
     public Despesa getDespesa(int id){
         for (Despesa d : despesas){
             if (d.getId() == id){

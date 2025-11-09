@@ -5,6 +5,7 @@
 package com.ufvjm.barbearia.controller;
 
 import com.ufvjm.barbearia.model.Atendimento;
+import com.ufvjm.barbearia.model.JsonRepository;
 import com.ufvjm.barbearia.model.Produto;
 import com.ufvjm.barbearia.model.Servico;
 import com.ufvjm.barbearia.utils.AtendimentoStatus;
@@ -18,10 +19,22 @@ import java.util.List;
  */
 public class AtendimentoController {
     private List<Atendimento> atendimentos = new ArrayList<>();
+    private JsonRepository<Atendimento> repo;
     
-    public AtendimentoController(){}
+    public AtendimentoController(){
+        repo = new JsonRepository<>("data/atendimentos.json", Atendimento.class);
+        this.carregar();
+    }
+        
+    public void save(){
+        repo.salvar(atendimentos);
+    }
     
- 
+    public void carregar(){
+        atendimentos.clear();
+        atendimentos.addAll(repo.carregar());
+    }
+    
     public void addAtendimento(Atendimento a){
         atendimentos.add(a);
     }

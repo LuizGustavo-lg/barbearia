@@ -31,7 +31,6 @@ public class UsuarioController {
     
     public void addNewUsuario(Usuario u){
         usuarios.add(u);
-        this.save();
     }
     
     

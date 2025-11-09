@@ -6,6 +6,7 @@ package com.ufvjm.barbearia.controller;
 
 import com.ufvjm.barbearia.model.Cliente;
 import com.ufvjm.barbearia.comparator.cliente.ClienteNomeComparator;
+import com.ufvjm.barbearia.model.JsonRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,8 +19,21 @@ import java.util.List;
  */
 public class ClienteController {
     private List<Cliente> clientes = new ArrayList<>();
+    private JsonRepository<Cliente> repo;
     
-    public ClienteController(){}
+    public ClienteController(){
+        repo = new JsonRepository<>("data/clientes.json", Cliente.class);
+        this.carregar();
+    }
+        
+    public void save(){
+        repo.salvar(clientes);
+    }
+    
+    public void carregar(){
+        clientes.clear();
+        clientes.addAll(repo.carregar());
+    }
     
     public void addNewCliente(String nome, String cpf){
         this.addNewCliente(new Cliente(nome, cpf));

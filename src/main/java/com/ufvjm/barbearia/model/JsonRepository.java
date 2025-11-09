@@ -9,11 +9,16 @@ import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
+import com.fatboyindustrial.gsonjavatime.Converters;
+
 
 public class JsonRepository<T> {
     private final String caminho;
     private final Class<T> tipo;
-    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private Gson gson = Converters.registerAll(new GsonBuilder())
+    .setPrettyPrinting()
+    .create();
 
     public JsonRepository(String caminho, Class<T> tipo) {
         this.caminho = caminho;

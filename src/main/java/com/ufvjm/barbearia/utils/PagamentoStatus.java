@@ -8,10 +8,7 @@ package com.ufvjm.barbearia.utils;
  *
  * @author kirito
  */
-public enum ReservaStatus {
-    AGENDADO,        // Agendamento marcado para o horário
-    ESPERA,          // Cliente entrou na lista de espera
-    EM_ATENDIMENTO,  // Atendimento foi iniciado
-    CONCLUIDO,       // Serviço finalizado
-    CANCELADO        // Cliente cancelou / vaga liberada
+public enum PagamentoStatus {
+    PAGO,
+    PENDENTE
 }

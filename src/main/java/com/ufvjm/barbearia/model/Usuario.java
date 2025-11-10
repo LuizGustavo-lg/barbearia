@@ -4,6 +4,9 @@
  */
 package com.ufvjm.barbearia.model;
 
+import org.mindrot.jbcrypt.BCrypt;
+
+
 /**
  *
  * @author kirito
@@ -17,7 +20,7 @@ public class Usuario extends Pessoa{
     
     public Usuario(String nome, String cpf, String telefone, String email, String endereco, String pass, String username) {
         super(nome, cpf, telefone, email, endereco);
-        this.password = pass;
+        this.password = gerarHash(pass);
         this.username = username;
     }
     
@@ -33,13 +36,17 @@ public class Usuario extends Pessoa{
         this.username = username;
     }
 
+    private String gerarHash(String senha) {
+        return BCrypt.hashpw(senha, BCrypt.gensalt()); // Gera o hash seguro
+    }
+    
     public boolean verifyPassword(String pass){
-        return this.password.equals(pass);
+        return BCrypt.checkpw(pass, this.password);
     }
 
     public boolean setPassword(String oldPass, String newPass) {
         if (this.verifyPassword(oldPass)){
-            this.password = newPass;
+            this.password = gerarHash(newPass);
             return true;
         }
         return false;

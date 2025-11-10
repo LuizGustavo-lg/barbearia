@@ -8,29 +8,29 @@ package com.ufvjm.barbearia.model;
  *
  * @author kirito
  */
-public class Altenticador {
+public class Autenticador {
     private static Usuario user;
     private static boolean logado = false;
     
 
     public static boolean isLogado() {
-        return Altenticador.logado;
+        return Autenticador.logado;
     }
 
     public static boolean isAdmin() {
-        if (Altenticador.logado) {
-            return Altenticador.user.adminAcess();
+        if (Autenticador.logado) {
+            return Autenticador.user.adminAcess();
         }
         return false;
     }
     
     public static void login(Usuario user) {
-        Altenticador.user = user;
+        Autenticador.user = user;
         logado = true;
     }
     
     public static void logout(){
-        Altenticador.user = null;
+        Autenticador.user = null;
         logado = false;
     }
     

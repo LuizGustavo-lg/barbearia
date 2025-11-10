@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class IdGenerator {
-    private static final String FILE_PATH = "data/ids.json";
     private static Map<String, Integer> contadores = new HashMap<>();
 
 

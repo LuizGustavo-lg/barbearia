@@ -5,7 +5,7 @@
 package com.ufvjm.barbearia.controller;
 
 import com.ufvjm.barbearia.model.Administrador;
-import com.ufvjm.barbearia.model.Altenticador;
+import com.ufvjm.barbearia.model.Autenticador;
 import com.ufvjm.barbearia.model.Funcionario;
 import com.ufvjm.barbearia.model.Usuario;
 import com.ufvjm.barbearia.model.JsonRepository;
@@ -103,7 +103,7 @@ public class UsuarioController {
         if (encontrado == null) {
             return false;
         }
-        Altenticador.login(encontrado);
+        Autenticador.login(encontrado);
         return true;
     }
     

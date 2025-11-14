@@ -15,10 +15,10 @@ import com.ufvjm.barbearia.utils.AtendimentoStatus;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  *
@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class Agenda {
     private List<Reserva> agendamentos = new ArrayList<>();
-    private Deque<Reserva> pilhaDeEspera = new ArrayDeque<>();
+     private Queue<Reserva> filaEspera = new LinkedList<>();
     private JsonRepository<Reserva> repo;
 
     public Agenda() {
@@ -67,7 +67,7 @@ public class Agenda {
     
     public void addPilhaDeEspera(Reserva r){
         r.setStatus(ReservaStatus.ESPERA);
-        pilhaDeEspera.push(r);
+        filaEspera.add(r);
     }
       
     
@@ -146,11 +146,14 @@ public class Agenda {
         
         r.setStatus(ReservaStatus.CANCELADO);
         
-        if (!pilhaDeEspera.isEmpty()){
-            Reserva newR = pilhaDeEspera.pop();
+        if (!filaEspera.isEmpty()){
+            Reserva newR = filaEspera.poll();
+            //verificar horario
             newR.setDatetime(r.getDatetime());
             addReserva(newR);
+            System.out.println(newR.getCliente().getNome() + "foi promovido da fila de espera.");
         }
+        
         Atendimento a = new Atendimento(r.getId(), AtendimentoStatus.CANCELADO);
         a.addServico(new Servico("Serviço Cancelado", (float) (r.getServicoPrevisto().getValor()*0.35), 0));
         return a;
@@ -158,6 +161,6 @@ public class Agenda {
     
     @Override
     public String toString() {
-        return "Agenda{" + "\nagendamentos=" + agendamentos + " \nagendSecundario=" + pilhaDeEspera + '}';
+        return "Agenda{" + "\nagendamentos=" + agendamentos + " \nagendSecundario=" + filaEspera + '}';
     }
 }

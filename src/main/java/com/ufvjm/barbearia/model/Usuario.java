@@ -14,6 +14,7 @@ import org.mindrot.jbcrypt.BCrypt;
 public class Usuario extends Pessoa{
     private String password;
     private String username;
+    private String cargo;
     
     public Usuario(){
     }
@@ -22,6 +23,13 @@ public class Usuario extends Pessoa{
         super(nome, cpf, telefone, email, endereco);
         this.password = gerarHash(pass);
         this.username = username;
+    }
+    
+    public Usuario(String nome, String cpf, String telefone, String email, String endereco, String pass, String username, String cargo) {
+        super(nome, cpf, telefone, email, endereco);
+        this.password = gerarHash(pass);
+        this.username = username;
+        this.cargo = cargo;
     }
     
     public Usuario(String nome, String cpf) {
@@ -36,6 +44,14 @@ public class Usuario extends Pessoa{
         this.username = username;
     }
 
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+    
     private String gerarHash(String senha) {
         return BCrypt.hashpw(senha, BCrypt.gensalt()); // Gera o hash seguro
     }

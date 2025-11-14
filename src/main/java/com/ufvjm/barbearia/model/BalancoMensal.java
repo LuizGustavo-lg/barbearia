@@ -14,6 +14,8 @@ public class BalancoMensal extends EntidadeBaseId{
     private double receitas;
     private double despesas;
     private double lucroLiquido;
+    private int qntServicosRealizados;
+    private int qntProdutosVendidos;
 
     public BalancoMensal(int mes, int ano, double receitas, double despesas) {
         super();
@@ -23,6 +25,17 @@ public class BalancoMensal extends EntidadeBaseId{
         this.despesas = despesas;
         this.lucroLiquido = receitas - despesas;
     }
+
+    public BalancoMensal(int mes, int ano, double receitas, double despesas, int qntServicosRealizados, int qntProdutosVendidos) {
+        super();
+        this.mes = mes;
+        this.ano = ano;
+        this.receitas = receitas;
+        this.despesas = despesas;
+        this.qntServicosRealizados = qntServicosRealizados;
+        this.qntProdutosVendidos = qntProdutosVendidos;
+    }
+    
 
     public int getMes() {
         return mes;
@@ -43,4 +56,19 @@ public class BalancoMensal extends EntidadeBaseId{
     public double getLucroLiquido() {
         return lucroLiquido;
     }
+
+    public int getQntServicosRealizados() {
+        return qntServicosRealizados;
+    }
+
+    public int getQntProdutosVendidos() {
+        return qntProdutosVendidos;
+    }
+
+    @Override
+    public String toString() {
+        return "BalancoMensal{" + "mes=" + mes + ", ano=" + ano + ", receitas=" + receitas + ", despesas=" + despesas + ", lucroLiquido=" + lucroLiquido + ", qntServicosRealizados=" + qntServicosRealizados + ", qntProdutosVendidos=" + qntProdutosVendidos + '}';
+    }
+    
+    
 }

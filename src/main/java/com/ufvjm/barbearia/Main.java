@@ -27,5 +27,8 @@ public class Main {
         MenuPrincipalViewCli menu = new MenuPrincipalViewCli(usuariosController, clientesController);
 
         menu.exibirMenu();
+        
+        clientesController.save();
+        usuariosController.save();
     }
 }

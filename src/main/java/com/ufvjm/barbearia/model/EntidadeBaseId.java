@@ -14,6 +14,10 @@ public abstract class EntidadeBaseId {
     public EntidadeBaseId() {
         this.id = IdGenerator.nextId(this.getClass());
     }
+    
+    public EntidadeBaseId(int id) {
+        this.id = id;
+    }
 
     public int getId() {
         return id;

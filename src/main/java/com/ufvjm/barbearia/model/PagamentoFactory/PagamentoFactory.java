@@ -4,8 +4,6 @@
  */
 package com.ufvjm.barbearia.model.PagamentoFactory;
 
-import com.ufvjm.barbearia.model.Pagamento;
-
 /**
  *
  * @author kirito

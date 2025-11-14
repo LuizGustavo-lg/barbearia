@@ -141,21 +141,34 @@ public class Agenda {
     }
     
     
+    public boolean horarioJaPassou(LocalDateTime horario) {
+        return horario.isBefore(LocalDateTime.now());
+    }
+    
     public Atendimento cancelarReserva(int id){
         Reserva r = getReserva(id);
+        float retencao = (float) r.calcularRetencaoPorCancelamento();
+        float reembolso = (float)  r.calcularReembolsoPorCancelamento();
         
         r.setStatus(ReservaStatus.CANCELADO);
         
+        
         if (!filaEspera.isEmpty()){
             Reserva newR = filaEspera.poll();
-            //verificar horario
+
             newR.setDatetime(r.getDatetime());
             addReserva(newR);
+            
             System.out.println(newR.getCliente().getNome() + "foi promovido da fila de espera.");
         }
         
-        Atendimento a = new Atendimento(r.getId(), AtendimentoStatus.CANCELADO);
-        a.addServico(new Servico("Serviço Cancelado", (float) (r.getServicoPrevisto().getValor()*0.35), 0));
+        
+        System.out.println("Cancelamento realizado.");
+        System.out.println("Valor retido: R$ " + retencao);
+        System.out.println("Valor reembolsado ao cliente: R$ " + reembolso);
+        
+        Atendimento a = new Atendimento(-1, r.getId(), AtendimentoStatus.CANCELADO);
+        a.addServico(new Servico(-1, "Serviço Cancelado", retencao, "", 0));
         return a;
     }   
     

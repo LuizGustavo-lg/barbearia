@@ -14,7 +14,6 @@ import com.ufvjm.barbearia.utils.AtendimentoStatus;
  */
 public class Atendimento extends EntidadeBaseId{
     private AtendimentoStatus status;
-    private int statusAtual = 0;
     
     private int reservaId;
     private Barbeiro barbeiro;
@@ -22,15 +21,18 @@ public class Atendimento extends EntidadeBaseId{
     private List <Produto> produtos = new ArrayList<Produto>();
     
     
-    public Atendimento(int reserva, AtendimentoStatus s){
+    public Atendimento(int reservaId, AtendimentoStatus s){
         super();
-        this.statusAtual = 0;
-
         
-        this.reservaId = reserva;
+        this.reservaId = reservaId;
         this.status = s;
     }
     
+    public Atendimento(int id, int reservaId, AtendimentoStatus s){
+        super(id);
+        this.reservaId = reservaId;
+        this.status = s;
+    }
 
     
     public AtendimentoStatus getStatus(){
@@ -84,7 +86,7 @@ public class Atendimento extends EntidadeBaseId{
 
     @Override
     public String toString() {
-        return "Atendimento{" + "status=" + status + ", statusAtual=" + statusAtual + ", reservaId=" + reservaId + ", barbeiro=" + barbeiro + ", servicos=" + servicos + ", produtos=" + produtos + '}';
+        return "Atendimento{" + "status=" + status + ", reservaId=" + reservaId + ", barbeiro=" + barbeiro + ", servicos=" + servicos + ", produtos=" + produtos + '}';
     }
     
 

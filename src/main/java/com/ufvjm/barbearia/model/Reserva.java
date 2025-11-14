@@ -28,6 +28,22 @@ public class Reserva extends EntidadeBaseId{
         this.descricao = descricao;
         this.servicoPrevisto = servico;
     }
+    
+    
+    public double calcularValorParaAgendar() {
+        return servicoPrevisto.getValor() * 0.50;
+    }
+
+    public double calcularRetencaoPorCancelamento() {
+        double valorPago = servicoPrevisto.getValor() * 0.50;
+        return valorPago * 0.35;
+    }
+
+    public double calcularReembolsoPorCancelamento() {
+        double valorPago = servicoPrevisto.getValor() * 0.50;
+        return valorPago - calcularRetencaoPorCancelamento();
+    }
+    
 
     public Cliente getCliente() {
         return cliente;

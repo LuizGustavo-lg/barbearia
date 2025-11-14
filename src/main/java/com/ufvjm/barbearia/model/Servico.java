@@ -20,7 +20,18 @@ public class Servico extends ItemVendavel{
         super(nome, valor, descricao);
         this.passosTempo = passosTempo;
     }
+    
+    public Servico(int id, String nome, float valor, String descricao, int passosTempo) {
+        super(id, nome, valor, descricao);
+        this.passosTempo = passosTempo;
+    }
 
+    public Servico(int id, String nome, float valor, int passosTempo) {
+        super(id, nome, valor);
+        this.passosTempo = passosTempo;
+    }
+
+    
     public int getPassosTempo() {
         return passosTempo;
     }

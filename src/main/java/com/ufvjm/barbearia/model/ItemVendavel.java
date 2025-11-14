@@ -28,6 +28,19 @@ public class ItemVendavel extends EntidadeBaseId{
         this.valor = valor;
         this.descricao = descricao;
     }
+    
+    public ItemVendavel(int id, String nome, float valor, String descricao) {
+        super(id);
+        this.nome = nome;
+        this.valor = valor;
+        this.descricao = descricao;
+    }
+    
+    public ItemVendavel(int id, String nome, float valor) {
+        super(id);
+        this.nome = nome;
+        this.valor = valor;
+    }
 
     public String getNome() {
         return nome;

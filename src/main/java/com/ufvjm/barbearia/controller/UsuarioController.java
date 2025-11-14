@@ -28,7 +28,7 @@ public class UsuarioController {
         repoA = new JsonRepository<>("data/administradores.json", Administrador.class);
         
         this.carregar();
-        if (getQuantAdmins() <= 1) {
+        if (getQuantAdmins() < 1) {
             usuarios.add(new Administrador("Admin", null, null, null, null, "admin", "admin"));
         }
     }
